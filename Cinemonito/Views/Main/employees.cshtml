@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Cinemonito.Models.Employee>
 
-
 @{
-    ViewBag.Title = "Empleados";
+    ViewBag.Title = "Lista Empleados";
 }
+
 
 <table class="table">
     <tr>
@@ -17,46 +17,62 @@
             @Html.DisplayNameFor(model => model.Phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContractDate)
+            @Html.DisplayNameFor(model => model.ContractDateInit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractDateEnd)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Salary)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Headquarters.Name)
+            @Html.DisplayNameFor(model => model.IdHeadquarter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Position.Position1)
         </th>
         <th></th>
     </tr>
-
-    @foreach (Cinemonito.Models.Employee employee in Model)
-    {
-            
-        <tr>
-            <td>@employee.Identification</td>
-            <td>@employee.Name</td>
-            <td>@employee.Phone</td>
-            <td>@employee.ContractDate</td>
-            <td>@employee.Salary</td>
-            <td>@employee.IdHeadquarter</td>
-            <td>@employee.IdPosition</td>
-            <td>
-                @*@if (false)
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = employee.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = employee.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = employee.Id }) 
-                }
-                else
-                {*@
-                    <text>Editar</text>
-                    <text>Detalles</text>
-                    <text>Borrar</text>
-                
-            </td>
-        </tr>
-    }
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Identification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractDateInit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractDateEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdHeadquarter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPosition)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+    
 </table>
 
