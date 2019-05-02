@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Cinemonito.Models.Employee>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Styles/creative.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Cinemonito</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">Acerca de cinemonito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead -->
+    <header class="masthead">
+        <div class="container h-100" style="background-image:url(../../Images/Home/Portada.jpg)" "background-repeat:no-repeat">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">REALIZA TU COMPRA EN LOS MEJORES CINES</h1>
+                    <hr class="divider my-4">
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">¡BIENVENIDOS!</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="@Url.Action("Index", "Main")">COMPRAR EN CINEMONITO</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0">Contactanos</h2>
+                    <hr class="divider my-4">
+                    <p class="text-muted mb-5">En caso de que necesites ayuda, contacta a soporte</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center">
+                    <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                    <div>+57 3413133009</div>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                    <!-- Make sure to change the email address in anchor text AND the link below! -->
+                    <a class="d-block" href="mailto:contact@yourwebsite.com">jrojaslator@uniminuto.edu.co</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright &copy; 2019 - Cinemonito</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+@*<center>
+    <h4>Empleados</h4>
+    <hr />
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Nombre Empleado</th>
+            <th>Salario</th>
+            <th>Identificacion</th>
+            <th>Telefono</th>
+            <th>Posicion</th>
+            <th>IdHeadquarter</th>
+            <th>ContractDate</th>
+        </tr>
+        @foreach (Cinemonito.Models.Employee employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Salary</td>
+                <td>@employee.Identification</td>
+                <td>@employee.Phone</td>
+                <td>@employee.IdPosition</td>
+                <td>@employee.IdHeadquarter</td>
+                <td>@employee.ContractDate</td>
+            </tr>
+        }
+    </table>
+</center>
+</body>
+</html>*@

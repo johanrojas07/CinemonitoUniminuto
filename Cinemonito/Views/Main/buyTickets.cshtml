@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Cinemonito.Models.Movie>
+
+
+@{
+    ViewBag.Title = "Comprar Boletas";
+}
+
+
+<h1>Lista de peliculas</h1>
+@foreach (Cinemonito.Models.Movie movie in Model)
+{
+    <div class="col-sm-3" style="padding: 15px 15px 15px 15px">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@movie.Name</h5>
+                <p class="card-text">@movie.Synopsis</p>
+                <a href="#" class="btn btn-primary">@movie.Classification</a>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinemonito", "Cinemonito\Cinemonito.csproj", "{BAE83D28-EF79-41FA-8B9E-4914E926C66B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAE83D28-EF79-41FA-8B9E-4914E926C66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAE83D28-EF79-41FA-8B9E-4914E926C66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAE83D28-EF79-41FA-8B9E-4914E926C66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAE83D28-EF79-41FA-8B9E-4914E926C66B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49B9ACE6-5FB9-43FA-8245-D6DDDB7F661F}
+	EndGlobalSection
+EndGlobal
