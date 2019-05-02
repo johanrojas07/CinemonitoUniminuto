@@ -14,11 +14,11 @@ namespace Cinemonito.Models
     
     public partial class ChairByMovie
     {
-        public long IdMovieByRoom { get; set; }
+        public long IdMovie { get; set; }
         public long IdChair { get; set; }
         public bool IsAvailable { get; set; }
     
         public virtual Chair Chair { get; set; }
-        public virtual MoviesByRoom MoviesByRoom { get; set; }
+        public virtual Movie Movie { get; set; }
     }
 }

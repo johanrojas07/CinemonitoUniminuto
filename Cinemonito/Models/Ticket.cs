@@ -16,10 +16,10 @@ namespace Cinemonito.Models
     {
         public long Id { get; set; }
         public long IdClient { get; set; }
-        public long IdMovieByRoom { get; set; }
+        public long IdMovie { get; set; }
         public int Quantity { get; set; }
     
         public virtual Client Client { get; set; }
-        public virtual MoviesByRoom MoviesByRoom { get; set; }
+        public virtual Movie Movie { get; set; }
     }
 }
