@@ -12,13 +12,13 @@ namespace Cinemonito.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChairByMovie
+    public partial class DetailSaleProducts
     {
-        public long IdMovieByRoom { get; set; }
-        public long IdChair { get; set; }
-        public bool IsAvailable { get; set; }
+        public long IdSale { get; set; }
+        public long IdProduct { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual Chair Chair { get; set; }
-        public virtual MoviesByRoom MoviesByRoom { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual SaleProducts SaleProducts { get; set; }
     }
 }
