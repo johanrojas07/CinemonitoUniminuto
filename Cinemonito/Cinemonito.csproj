@@ -277,6 +277,8 @@
     <Content Include="Views\Shared\_LayoutMainMenu.cshtml" />
     <Content Include="Views\Main\buySnacks.cshtml" />
     <Content Include="Views\Main\employees.cshtml" />
+    <Content Include="Views\Main\createEmployee.cshtml" />
+    <Content Include="Views\Main\editEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
