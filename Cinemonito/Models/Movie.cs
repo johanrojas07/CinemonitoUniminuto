@@ -17,7 +17,9 @@ namespace Cinemonito.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Movie()
         {
+            this.ChairByMovie = new HashSet<ChairByMovie>();
             this.MoviesByRoom = new HashSet<MoviesByRoom>();
+            this.Ticket = new HashSet<Ticket>();
         }
     
         public long Id { get; set; }
@@ -26,6 +28,10 @@ namespace Cinemonito.Models
         public string Synopsis { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChairByMovie> ChairByMovie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MoviesByRoom> MoviesByRoom { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ticket> Ticket { get; set; }
     }
 }
