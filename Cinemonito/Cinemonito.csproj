@@ -163,7 +163,13 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetailSaleProducts.cs">
+      <DependentUpon>cinemonitoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs">
+      <DependentUpon>cinemonitoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeByHeadquarter.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Headquarters.cs">
@@ -178,6 +184,9 @@
     <Compile Include="Models\Position.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PrizeTicket.cs">
+      <DependentUpon>cinemonitoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
@@ -190,10 +199,7 @@
     <Compile Include="Models\Room.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>cinemonitoModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Models\SaleProducts.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -222,8 +228,8 @@
     <Content Include="Images\Home\Portada.jpg" />
     <Content Include="Models\cinemonitoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>cinemonitoModel.Context.cs</LastGenOutput>
       <DependentUpon>cinemonitoModel.edmx</DependentUpon>
+      <LastGenOutput>cinemonitoModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\cinemonitoModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

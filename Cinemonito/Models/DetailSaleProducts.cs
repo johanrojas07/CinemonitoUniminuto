@@ -10,10 +10,15 @@
 namespace Cinemonito.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class DetailSaleProducts
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public long IdSale { get; set; }
+        public long IdProduct { get; set; }
+        public int Quantity { get; set; }
+    
+        public virtual Product Product { get; set; }
+        public virtual SaleProducts SaleProducts { get; set; }
     }
 }

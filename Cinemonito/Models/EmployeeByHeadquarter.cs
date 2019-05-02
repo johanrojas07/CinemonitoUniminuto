@@ -10,13 +10,16 @@
 namespace Cinemonito.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class EmployeeByHeadquarter
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public long IdEmployee { get; set; }
+        public long IdHeadquarter { get; set; }
+        public System.DateTime DateUbication { get; set; }
+        public bool IsActualUbication { get; set; }
+    
+        public virtual Employee Employee { get; set; }
+        public virtual Headquarters Headquarters { get; set; }
     }
 }
