@@ -14,16 +14,25 @@ namespace Cinemonito.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.EmployeeByHeadquarter = new HashSet<EmployeeByHeadquarter>();
+        }
+    
         public long Id { get; set; }
         public string Identification { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public System.DateTime ContractDate { get; set; }
+        public System.DateTime ContractDateInit { get; set; }
+        public Nullable<System.DateTime> ContractDateEnd { get; set; }
         public decimal Salary { get; set; }
         public long IdHeadquarter { get; set; }
         public long IdPosition { get; set; }
+        public string Password { get; set; }
     
-        public virtual Headquarters Headquarters { get; set; }
         public virtual Position Position { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeByHeadquarter> EmployeeByHeadquarter { get; set; }
     }
 }

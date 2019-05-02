@@ -30,16 +30,20 @@ namespace Cinemonito.Models
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Headquarters> Headquarters { get; set; }
         public virtual DbSet<Movie> Movie { get; set; }
+        public virtual DbSet<MoviesByRoom> MoviesByRoom { get; set; }
         public virtual DbSet<Position> Position { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<SaleProducts> SaleProducts { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TypeChair> TypeChair { get; set; }
         public virtual DbSet<TypeHeadquarters> TypeHeadquarters { get; set; }
         public virtual DbSet<ChairByMovie> ChairByMovie { get; set; }
-        public virtual DbSet<MoviesByRoom> MoviesByRoom { get; set; }
+        public virtual DbSet<DetailSaleProducts> DetailSaleProducts { get; set; }
+        public virtual DbSet<EmployeeByHeadquarter> EmployeeByHeadquarter { get; set; }
+        public virtual DbSet<PrizeTicket> PrizeTicket { get; set; }
         public virtual DbSet<ProductsByHeadquarters> ProductsByHeadquarters { get; set; }
     }
 }
