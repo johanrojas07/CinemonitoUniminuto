@@ -17,10 +17,9 @@ namespace Cinemonito.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Headquarters()
         {
-            this.EmployeeByHeadquarter = new HashSet<EmployeeByHeadquarter>();
+            this.Employee = new HashSet<Employee>();
             this.ProductsByHeadquarters = new HashSet<ProductsByHeadquarters>();
             this.Room = new HashSet<Room>();
-            this.SaleProducts = new HashSet<SaleProducts>();
         }
     
         public long Id { get; set; }
@@ -29,13 +28,11 @@ namespace Cinemonito.Models
         public long IdTypeHeadquarters { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeByHeadquarter> EmployeeByHeadquarter { get; set; }
+        public virtual ICollection<Employee> Employee { get; set; }
         public virtual TypeHeadquarters TypeHeadquarters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsByHeadquarters> ProductsByHeadquarters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Room { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SaleProducts> SaleProducts { get; set; }
     }
 }
