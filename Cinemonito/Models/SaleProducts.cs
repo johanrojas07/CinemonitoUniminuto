@@ -12,20 +12,21 @@ namespace Cinemonito.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Movie
+    public partial class SaleProducts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Movie()
+        public SaleProducts()
         {
-            this.MoviesByRoom = new HashSet<MoviesByRoom>();
+            this.DetailSaleProducts = new HashSet<DetailSaleProducts>();
         }
     
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string Classification { get; set; }
-        public string Synopsis { get; set; }
+        public long IdHeadquarter { get; set; }
+        public System.DateTime Date { get; set; }
+        public decimal Total { get; set; }
     
+        public virtual Headquarters Headquarters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoviesByRoom> MoviesByRoom { get; set; }
+        public virtual ICollection<DetailSaleProducts> DetailSaleProducts { get; set; }
     }
 }

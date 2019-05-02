@@ -4,36 +4,45 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b60b2ac750dd41f3a6a850ada8a0abf3" Name="Diagram1">
-        <EntityTypeShape EntityType="CinemonitoModel.Chair" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Client" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Employee" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Headquarters" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Movie" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Position" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Product" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Role" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Room" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.Ticket" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.TypeChair" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.TypeHeadquarters" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.ChairByMovie" Width="1.5" PointX="7.5" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.MoviesByRoom" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemonitoModel.ProductsByHeadquarters" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="74624cff5cfe4437a85e0b1fd2a3a972" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemonitoModel.Chair" Width="1.5" PointX="7.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Client" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Employee" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Headquarters" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Movie" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.MoviesByRoom" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Position" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Product" Width="1.5" PointX="5.25" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Role" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Room" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.SaleProducts" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.Ticket" Width="1.5" PointX="9.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.TypeChair" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.TypeHeadquarters" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.ChairByMovie" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.DetailSaleProducts" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.EmployeeByHeadquarter" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.PrizeTicket" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemonitoModel.ProductsByHeadquarters" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
         <AssociationConnector Association="CinemonitoModel.FK_Chair_TypeChair" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_ChairByMovie_Chair" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_PrizeTicket_Client" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_Ticket_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemonitoModel.FK_Employee_Headquarters" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_Employee_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_EmployeeByHeadquarter_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_EmployeeByHeadquarter_Headquarters" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_Headquarters_TypeHeadquarters" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_ProdcutsByHeadquarters_Headquarters" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_Room_Headquarters" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemonitoModel.FK_ChairByMovie_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_SaleProducts_Headquarters" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_MoviesByRoom_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemonitoModel.FK_Ticket_Movie" ManuallyRouted="false" />
-        <AssociationConnector Association="CinemonitoModel.FK_ProdcutsByHeadquarters_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.FK_MoviesByRoom_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_Ticket_MoviesByRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_DetailSaleProducts_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_ProdcutsByHeadquarters_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemonitoModel.FK_DetailSaleProducts_SaleProducts" ManuallyRouted="false" />
         <AssociationConnector Association="CinemonitoModel.RoleByPosition" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

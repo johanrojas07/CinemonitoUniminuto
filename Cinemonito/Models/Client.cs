@@ -17,6 +17,7 @@ namespace Cinemonito.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
+            this.PrizeTicket = new HashSet<PrizeTicket>();
             this.Ticket = new HashSet<Ticket>();
         }
     
@@ -25,6 +26,8 @@ namespace Cinemonito.Models
         public string Identification { get; set; }
         public int TotalPoints { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PrizeTicket> PrizeTicket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Ticket { get; set; }
     }
