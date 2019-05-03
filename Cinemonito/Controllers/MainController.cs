@@ -71,6 +71,7 @@ namespace Cinemonito.Controllers
                 multiplex.nameMovie = datos[0].nameMovie;
                 ViewBag.listMultiplex = datos;
                 return View();
+
             }
         }
 
