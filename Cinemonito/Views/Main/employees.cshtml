@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Cinemonito.Models.Employee>
+﻿@using Cinemonito.Entitys;
+
 
 @{
     ViewBag.Title = "Comprar Boletas";
@@ -7,72 +8,86 @@
 <button class="row btn-secondary btn-outline-success">
     @Html.ActionLink("Crear empleado", "createEmployee", "Main")
 </button>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Identification)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContractDateInit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContractDateEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHeadquarter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Position.Position1)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Identification)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractDateInit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractDateEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHeadquarter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPosition)
-            </td>
-            <td>
-                <a href="@Url.Action("delete", new { id = item.Id})"><i class="glyphicon glyphicon-trash"></i></a>
-                <a href="@Url.Action("editEmployee", new { id = item.Id})"><i class="glyphicon glyphicon-edit"></i></a>
-            </td>
-        </tr>
-    }
-    
-    </table>
+<div class="d-flex justify-content-center align-items-center container ">
+    <div class="row ">
+        <table class="table text-center">
+            <tr>
+                <th>
+                    Identification
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    ContractDateInit
+                </th>
+                <th>
+                    ContractDateEnd
+                </th>
+                <th>
+                    Salary
+                </th>
+                <th>
+                    IdHeadquarter
+                </th>
+                <th>
+                    Password
+                </th>
+                <th>
+                    Role
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @*@ViewBag.employees[i].identification*@
+                        @item.identification
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].name*@
+                        @item.name
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].phone*@
+                        @item.phone
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].contractDateInit*@
+                        @item.contractDateInit
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].contractDateEnd*@
+                        @item.contractDateEnd
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].salary*@
+                        @item.salary
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].headquarterName*@
+                        @item.headquarterName
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].password*@
+                        @item.password
+                    </td>
+                    <td>
+                        @*@ViewBag.employees[i].role*@
+                        @item.role
+                    </td>
+                    <td>
+                        <a href="@Url.Action("delete", new { id = @item.id})"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="@Url.Action("editEmployee", new { id = @item.id})"><i class="glyphicon glyphicon-edit"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+     </div>
+</div>

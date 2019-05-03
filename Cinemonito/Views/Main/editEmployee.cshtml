@@ -1,20 +1,59 @@
 ﻿@model Cinemonito.Models.Employee
-@using (Html.BeginForm())
-{
-    <div class="container">
-        <div class="form-group">
-            <label>Username:</label>
-            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            <label>Password:</label>
-            @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+@using System.Linq;
+@using System.Data.Entity;
 
-        </div>
-        <div class="button">
-            <button>Submit</button>
-        </div>
+<div class="d-flex justify-content-center align-items-center container ">
+    <div class="row ">
+        @using (Html.BeginForm())
+        {
+            <div class="container">
+                <div class="form-group">
+                    <label>Identification:</label>
+                    @Html.TextBoxFor(x => x.Identification, new { @class = "form-control", @Value = @Model.Identification, @required = "required", type = "number" })
+                </div>
+                <div class="form-group">
+                    <label>Username:</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @Value = @Model.Name, @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @Value = @Model.Phone, @required = "required", type = "number" })
+                </div>
+                <div class="form-group">
+                    <label>ContractDateInit:</label>
+                    @*@Html.TextBoxFor(x => x.ContractDateInit, new { @class = "form-control" })*@
+                    @*@Html.TextBoxFor(model => model.ContractDateInit, new { @type = "date", @Value = Model.ContractDateInit.ToString("yyyy-MM-dd") })*@
+                    @Html.TextBoxFor(m => m.ContractDateInit, new { @Value = @Model.ContractDateInit.ToString("yyyy-MM-dd"), @required = "required", type = "date" })
+                </div>
+                <div class="form-group">
+                    <label>ContractDateEnd:</label>
+                    @*@Html.TextBoxFor(model => model.ContractDateEnd, new { @type = "date", @Value = Model.ContractDateEnd.ToString("yyyy-MM-dd") })*@
+                    @Html.TextBoxFor(m => m.ContractDateEnd, "{0:MM/dd/yyyy}", new { @Value = @Model.ContractDateEnd, type = "date" })
+                </div>
+                <div class="form-group">
+                    <label>Salary:</label>
+                    @Html.TextBoxFor(x => x.Salary, new { @class = "form-control", @Value = @Model.Salary, @required = "required", type = "number" })
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @Value = @Model.Password, @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Multiplex</label>
+                    @Html.DropDownListFor(model => model.IdHeadquarter, new SelectList(ViewBag.mutliplexList, "Id", "Name"), new { @class = "form-control", @Value = @Model.IdHeadquarter, @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Rol</label>
+                    @Html.DropDownListFor(model => model.IdPosition, new SelectList(ViewBag.positionList, "Id", "Position1"), new { @class = "form-control", @Value = @Model.IdPosition, @required = "required" })
+                </div>
+                <div class="button">
+                    <button>Submit</button>
+                </div>
+            </div>
 
-
+            <div class="row">
+                @Html.ActionLink("Back to List", "employees")
+            </div>
+        }
     </div>
-}
+</div>

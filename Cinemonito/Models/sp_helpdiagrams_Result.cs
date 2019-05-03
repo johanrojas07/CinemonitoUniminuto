@@ -10,15 +10,13 @@
 namespace Cinemonito.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductsByHeadquarters
+    public partial class sp_helpdiagrams_Result
     {
-        public long IdHeadquarter { get; set; }
-        public long IdProduct { get; set; }
-        public int Quantity { get; set; }
-    
-        public virtual Headquarters Headquarters { get; set; }
-        public virtual Product Product { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
