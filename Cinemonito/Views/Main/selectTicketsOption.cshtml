@@ -1,0 +1,30 @@
+﻿
+
+@{
+    ViewBag.Title = "Select Ticket option";
+}
+
+    <h1>Lista de Multiplex</h1>
+    <div class="row">
+        @foreach (var item in ViewBag.listMultiplex)
+        {
+            <div class="col-sm-3 center-block" style="padding: 15px 15px 15px 15px; background: gray">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="./../Images/BigCarrete.Png" alt="Card image cap">
+                    <div class="card-body">
+                        <h2 class="text-black font-weight-bold">Multiplex:</h2>
+                        <p class="card-title">@item</p>
+                        @Html.ActionLink("Esté multiplex", "selectRoom", new { multiplex = item })
+                        @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+
+    
+
+    <div class="row">
+        @Html.ActionLink("Back to List", "buyTickets")
+    </div>

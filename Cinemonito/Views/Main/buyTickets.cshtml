@@ -11,11 +11,15 @@
 {
     <div class="col-sm-3" style="padding: 15px 15px 15px 15px">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <img class="card-img-top" src="./../Images/BigCarrete.Png" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">@movie.Name</h5>
-                <p class="card-text">@movie.Synopsis</p>
-                <a href="#" class="btn btn-primary">@movie.Classification</a>
+                <h2 class="text-black font-weight-bold">Título:</h2>
+                <p class="card-title">@movie.Name</p>
+                <h2 class="text-black font-weight-bold">Clasificación:</h2>
+                <p class="card-text">@movie.Classification</p>
+
+                @Html.ActionLink("Comprar", "selectTicketsOption", new { id = @movie.Id })
+                @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
             </div>
         </div>
     </div>
