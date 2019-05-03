@@ -35,61 +35,50 @@ namespace Cinemonito.Controllers
             }
         }
 
-        public ActionResult selectTicketsOption(int id)
+        public ActionResult delete(int id)
         {
             using (var db = new CinemonitoEntities())
             {
-                var datos = (from MoviesByRoom in db.MoviesByRoom
-                            join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
-                            join Headquarters in db.Headquarters on Room.IdHeadquarter equals Headquarters.Id
-                            where MoviesByRoom.IdMovie.Equals(id)
-                            select new
-                            {
-                                name = Headquarters.Name,
-                                id = Headquarters.Id,
-                                address = Headquarters.Address,
-                                idMovie = MoviesByRoom.IdMovie,
-                                idRoom = MoviesByRoom.IdRoom
-                            }).ToList();
-                ViewBag.listMultiplex = datos;
-                return View();  
+                var item = db.Employee.FirstOrDefault(x => x.Id == id);
+                if (item != null)
+                {
+                    db.Employee.Remove(item);
+                    db.SaveChanges();
+                }
+                var item2 = db.Employee.ToList();
+                return View("employees", item2);
             }
         }
 
-        public ActionResult selectRoom(Multiplex multiplex)
+        public ActionResult editEmployee(int id)
         {
             using (var db = new CinemonitoEntities())
             {
-                var datos = (from MoviesByRoom in db.MoviesByRoom
-                             join Movie in db.Movie on MoviesByRoom.IdMovie equals Movie.Id
-                             where MoviesByRoom.IdMovie.Equals(multiplex.idMovie) && MoviesByRoom.IdMovie.Equals(multiplex.idRoom)
-                             select new
-                             {
-                                 nameMovie = Movie.Name,
-                                 horary = MoviesByRoom.Horary
-                             }).ToList();
-                multiplex.nameMovie = datos[0].nameMovie;
-                ViewBag.listMultiplex = datos;
+                var item = db.Employee.Where(x => x.Id == id).First();
+                return View(item);
+            } 
+        }
+        [HttpPost]
+        public ActionResult editEmployee(Employee model)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Employee.Where(x => x.Id == model.Id).First();
+                item.Identification = model.Name;
+                item.Password = model.Password;
+                db.SaveChanges();
+                var item2 = db.Employee.ToList();
+                return View("employees", item2);
+            }
+                
+        }
+
+        public ActionResult createEmployee()
+        {
+            using (var db = new CinemonitoEntities())
+            {
                 return View();
-
             }
         }
-
-        public class Multiplex
-        {
-            public string name, address, nameMovie;
-            public int id, idMovie, idRoom;
-
-            public Multiplex()
-            {
-                this.nameMovie = null;
-                this.name = null;
-                this.address = null;
-                this.id = 0;
-                this.idMovie = 0;
-                this.idRoom = 0;
-            }
-        }
-        //selectTicketsOption
     }
 }
