@@ -13,8 +13,8 @@
           <Property Name="Location" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdTypeChair" Type="bigint" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.ChairByMovie' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.ChairByMovie' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChairByMovie">
           <Key>
             <PropertyRef Name="IdMovieByRoom" />
@@ -34,8 +34,8 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.ChairByMovie' no tiene defini
           <Property Name="Identification" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TotalPoints" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.DetailSaleProducts' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.DetailSaleProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DetailSaleProducts">
           <Key>
             <PropertyRef Name="IdSale" />
@@ -61,8 +61,8 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.DetailSaleProducts' no tiene 
           <Property Name="IdPosition" Type="bigint" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.EmployeeByHeadquarter' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.EmployeeByHeadquarter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeByHeadquarter">
           <Key>
             <PropertyRef Name="IdEmployee" />
@@ -110,8 +110,8 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.EmployeeByHeadquarter' no tie
           <Property Name="Position" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="45" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.PrizeTicket' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.PrizeTicket' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PrizeTicket">
           <Key>
             <PropertyRef Name="IdClient" />
@@ -133,8 +133,8 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.PrizeTicket' no tiene definid
           <Property Name="Description" Type="varchar" MaxLength="250" />
           <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.ProductsByHeadquarters' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.ProductsByHeadquarters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProductsByHeadquarters">
           <Key>
             <PropertyRef Name="IdHeadquarter" />
@@ -153,8 +153,8 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.ProductsByHeadquarters' no ti
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cinemonito.dbo.RoleByPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RoleByPosition">
           <Key>
             <PropertyRef Name="IdRole" />
@@ -181,16 +181,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <Property Name="IdHeadquarter" Type="bigint" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Total" Type="money" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -468,7 +458,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SaleProducts" EntityType="Self.SaleProducts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeChair" EntityType="Self.TypeChair" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeHeadquarters" EntityType="Self.TypeHeadquarters" Schema="dbo" store:Type="Tables" />
@@ -728,16 +717,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Headquarters" Relationship="Self.FK_SaleProducts_Headquarters" FromRole="SaleProducts" ToRole="Headquarters" />
           <NavigationProperty Name="DetailSaleProducts" Relationship="Self.FK_DetailSaleProducts_SaleProducts" FromRole="SaleProducts" ToRole="DetailSaleProducts" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Ticket">
           <Key>
@@ -1062,7 +1041,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Room" EntityType="Self.Room" />
           <EntitySet Name="SaleProducts" EntityType="Self.SaleProducts" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" />
           <EntitySet Name="TypeChair" EntityType="Self.TypeChair" />
           <EntitySet Name="TypeHeadquarters" EntityType="Self.TypeHeadquarters" />
@@ -1268,17 +1246,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CinemonitoModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Ticket">
             <EntityTypeMapping TypeName="CinemonitoModel.Ticket">
               <MappingFragment StoreEntitySet="Ticket">
@@ -1378,7 +1345,7 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
