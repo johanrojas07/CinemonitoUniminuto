@@ -233,6 +233,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Home\1.jpg" />
+    <Content Include="Images\Home\11.jpg" />
+    <Content Include="Images\Home\22.jpg" />
+    <Content Include="Images\Home\3.jpg" />
+    <Content Include="Images\Home\33.jpeg" />
+    <Content Include="Images\Home\4.jpg" />
+    <Content Include="Images\Home\avengersendgame.jpg" />
+    <Content Include="Images\Home\la_llorona.jpg" />
+    <Content Include="Images\Home\pequeñaSuiza.jpg" />
     <Content Include="Images\Home\Portada.jpg" />
     <Content Include="Models\cinemonitoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -287,6 +296,9 @@
     <Content Include="Views\Main\employees.cshtml" />
     <Content Include="Views\Main\createEmployee.cshtml" />
     <Content Include="Views\Main\editEmployee.cshtml" />
+    <Content Include="Views\Main\movies.cshtml" />
+    <Content Include="Views\Main\editMovie.cshtml" />
+    <Content Include="Views\Main\createMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

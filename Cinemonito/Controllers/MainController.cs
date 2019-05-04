@@ -32,22 +32,16 @@ namespace Cinemonito.Controllers
         {
             using (var db = new CinemonitoEntities())
             {
-                //var datos = (from Employee in db.Employee
-                //             join Position in db.Position on Employee.IdPosition equals Position.Id
-                //             join Headquarters in db.Headquarters on Employee.IdHeadquarter equals Headquarters.Id
-                //             select new
-                //             {
-                //                 identification = Employee.Identification,
-                //                 name = Employee.Name,
-                //                 phone = Employee.Phone,
-                //                 contractDateInit = Employee.ContractDateInit,
-                //                 contractDateEnd = Employee.ContractDateEnd,
-                //                 salary = Employee.Salary,
-                //                 headquarterName = Headquarters.Name,
-                //                 password = Employee.Password,
-                //                 role = Position.Position1,
-                //             }).ToList();
                 var data = this.getEmployess();
+                return View(data);
+            }
+        }
+
+        public ActionResult movies()
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var data = db.Movie.ToList();
                 return View(data);
             }
         }
@@ -62,21 +56,6 @@ namespace Cinemonito.Controllers
                     db.Employee.Remove(item);
                     db.SaveChanges();
                 }
-                //var datos = (from Employee in db.Employee
-                //             join Position in db.Position on Employee.IdPosition equals Position.Id
-                //             join Headquarters in db.Headquarters on Employee.IdHeadquarter equals Headquarters.Id
-                //             select new
-                //             {
-                //                 identification = Employee.Identification,
-                //                 name = Employee.Name,
-                //                 phone = Employee.Phone,
-                //                 contractDateInit = Employee.ContractDateInit,
-                //                 contractDateEnd = Employee.ContractDateEnd,
-                //                 salary = Employee.Salary,
-                //                 headquarterName = Headquarters.Name,
-                //                 password = Employee.Password,
-                //                 role = Position.Position1,
-                //             }).ToList();
                 var data = this.getEmployess();
                 var mutliplexList = db.Headquarters.ToList();
                 var positionList = db.Position.ToList();
@@ -84,6 +63,21 @@ namespace Cinemonito.Controllers
                 ViewBag.positionList = positionList;
                 //var item2 = db.Employee.ToList();
                 return View("employees", data);
+            }
+        }
+
+        public ActionResult deleteMovie(int id)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.FirstOrDefault(x => x.Id == id);
+                if (item != null)
+                {
+                    db.Movie.Remove(item);
+                    db.SaveChanges();
+                }
+                var data = db.Movie.ToList();
+                return View("movies", data);
             }
         }
 
@@ -99,6 +93,31 @@ namespace Cinemonito.Controllers
                 return View(item);
             } 
         }
+
+        public ActionResult editMovie(int id)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.Where(x => x.Id == id).First();
+                return View(item);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult editMovie(Movie model)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.Where(x => x.Id == model.Id).First();
+                item.Classification = model.Classification;
+                item.Name = model.Name;
+                item.Synopsis = model.Synopsis;
+                db.SaveChanges();
+                var data = db.Movie.ToList();
+                return View("movies", data);
+            }
+        }
+
         [HttpPost]
         public ActionResult editEmployee(Employee model)
         {
@@ -114,12 +133,33 @@ namespace Cinemonito.Controllers
                 item.Salary = model.Salary;
                 item.IdHeadquarter = model.IdHeadquarter;
                 item.IdPosition = model.IdPosition;
-
                 db.SaveChanges();
                 var employee = this.getEmployess();
                 return View("employees", employee);
             }
-                
+        }
+
+        public ActionResult createMovie()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult createMovie(Movie model)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var movies = db.Set<Movie>();
+                movies.Add(new Movie
+                {
+                    Name = model.Name,
+                    Classification = model.Classification,
+                    Synopsis = model.Synopsis
+                });
+                db.SaveChanges();
+                var data = db.Movie.ToList();
+                return View("movies", data);
+            }
         }
 
         public ActionResult createEmployee()
@@ -151,12 +191,10 @@ namespace Cinemonito.Controllers
                     IdPosition = model.IdPosition,
                     Password = model.Password,
                 });
-
-        db.SaveChanges();
+                db.SaveChanges();
                 var employeeResponse = this.getEmployess();
                 var mutliplexList = db.Headquarters.ToList();
                 var positionList = db.Position.ToList();
-
                 return View("employees", employeeResponse);
             }
         }
