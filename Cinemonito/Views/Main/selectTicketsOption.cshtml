@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@using Cinemonito.Entitys;
+@{
     ViewBag.Title = "Select Ticket option";
 }
 
@@ -8,11 +10,11 @@
     {
         <div class="col-sm-3 center-block" style="padding: 15px 15px 15px 15px; background: gray">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="./../Images/BigCarrete.Png" alt="Card image cap">
+                <img class="card-img-top" src="./../Images/salaCine.Png" alt="Card image cap">
                 <div class="card-body">
                     <h2 class="text-black font-weight-bold">Multiplex:</h2>
                     <p class="card-title">@item</p>
-                    @Html.ActionLink("Esté multiplex", "selectRoom", new { multiplex = item })
+                    @Html.ActionLink("Este multiplex", "selectRoom", new MultiplexEntity{ idMovie = item.idMovie, idRoom = item.idRoom })
                     @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
                 </div>
             </div>
