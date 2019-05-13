@@ -1,0 +1,109 @@
+﻿@model Cinemonito.Models.Product
+
+@{
+    ViewBag.Title = "Comprar Snacks";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>buySnacks</title>
+</head>
+<body>
+
+    <div class="form-horizontal">
+        <h4>Venta de Snacks Cinemonito</h4>
+        <hr />
+
+        @using (Html.BeginForm("SearchClient", "Snacks", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="nameClient" class="control-label col-md-2">Nombre del cliente</label>
+                <div class="col-md-10">
+                    <input type="text" name="idClient" required value="@ViewBag.idClient" class="form-control" />
+                    <br />
+                    <input type="submit" class="btn btn-primary col-md-2 form-control" value="Buscar" />
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <label class="control-label col-md-5">@ViewBag.Message</label>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.ClientRegister != null && !ViewBag.ClientRegister)
+            {
+                <a class="control-label col-md-5" href="@Url.Action("ActionMethod", "ControllerName")"> Registrar Cliente</a>
+            }
+        </div>
+
+        @using (Html.BeginForm("AddProduct", "Snacks", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.IdHeadquarter, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownList("Id", new SelectList(ViewBag.Products, "Id", "Name"), new { @class = "form-control", @required = "required", @onchange = "GetPrice(this.value)" })
+
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="amount" class="control-label col-md-2">Precio</label>
+                <div class="col-md-10">
+                    <input type="text" disabled id="amount" class="form-control col-md-10" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="amount" class="control-label col-md-2">Cantidad</label>
+                <div class="col-md-10">
+                    <input type="text" id="amount" class="form-control col-md-10" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="submit" class="btn btn-primary col-md-10 form-control" value="Agregar" />
+                </div>
+            </div>
+        }
+
+        <table class="table table-bordered table-responsive table-hover">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            @foreach (var d in ViewBag.DetailProductsSale)
+            {
+                <tr>
+                    <td></td>
+                    <td>@d.Quantity</td>
+                    <td>@d.Quantity</td>
+
+                </tr>
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-primary form-control" value="Comprar" />
+            </div>
+        </div>
+
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    <script>
+        function GetPrice(val) {
+            document.location.href = "/Snacks/GetPrice?value=" + val;
+        }
+    </script>
+</body>
+</html>

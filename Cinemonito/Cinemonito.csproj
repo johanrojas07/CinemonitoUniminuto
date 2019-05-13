@@ -134,6 +134,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SnacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Entitys\EmployeeEntity.cs" />
@@ -283,7 +284,7 @@
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\buyTickets.cshtml" />
     <Content Include="Views\Shared\_LayoutMainMenu.cshtml" />
-    <Content Include="Views\Main\buySnacks.cshtml" />
+    <Content Include="Views\Snacks\buySnacks.cshtml" />
     <Content Include="Views\Main\employees.cshtml" />
     <Content Include="Views\Main\createEmployee.cshtml" />
     <Content Include="Views\Main\editEmployee.cshtml" />
