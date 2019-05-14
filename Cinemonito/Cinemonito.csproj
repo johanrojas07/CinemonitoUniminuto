@@ -137,6 +137,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Entitys\EmployeeEntity.cs" />
+    <Compile Include="Entitys\MoviesByRoom.cs" />
     <Compile Include="Entitys\MultiplexEntity.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
