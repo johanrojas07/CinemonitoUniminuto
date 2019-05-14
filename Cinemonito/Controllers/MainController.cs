@@ -207,32 +207,34 @@ namespace Cinemonito.Controllers
                              join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
                              join Headquarters in db.Headquarters on Room.IdHeadquarter equals Headquarters.Id
                              where MoviesByRoom.IdMovie.Equals(id)
-                             select new
+                             select new MultiplexEntity
                              {
                                  name = Headquarters.Name,
-                                 id = Headquarters.Id,
+                                 id = (int)Headquarters.Id,
                                  address = Headquarters.Address,
-                                 idMovie = MoviesByRoom.IdMovie,
-                                 idRoom = MoviesByRoom.IdRoom
+                                 idMovie =(int) MoviesByRoom.IdMovie,
+                                 idRoom = (int) MoviesByRoom.IdRoom
                              }).ToList();
+
+
                 ViewBag.listMultiplex = datos;
                 return View();
             }
         }
 
-        public ActionResult selectRoom(MultiplexEntity multiplex)
+        public ActionResult selectRoom(int idMovie, int idRoom)
         {
             using (var db = new CinemonitoEntities())
             {
                 var datos = (from MoviesByRoom in db.MoviesByRoom
                              join Movie in db.Movie on MoviesByRoom.IdMovie equals Movie.Id
-                             where MoviesByRoom.IdMovie.Equals(multiplex.idMovie) && MoviesByRoom.IdMovie.Equals(multiplex.idRoom)
+                             where MoviesByRoom.IdMovie.Equals(idMovie) && MoviesByRoom.IdMovie.Equals(idRoom)
                              select new
                              {
                                  nameMovie = Movie.Name,
                                  horary = MoviesByRoom.Horary
                              }).ToList();
-                multiplex.nameMovie = datos[0].nameMovie;
+                //multiplex.nameMovie = datos[0].nameMovie;
                 ViewBag.listMultiplex = datos;
                 return View();
 

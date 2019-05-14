@@ -1,10 +1,10 @@
-﻿@{
-    ViewBag.Title = "Select Ticket option";
-}
+﻿@model IEnumerable<Cinemonito.Entitys.MultiplexEntity>
+
 
 <h1>Lista de Multiplex</h1>
 <div class="row">
-    @foreach (var item in ViewBag.listMultiplex)
+    -l
+    @foreach (Cinemonito.Entitys.MultiplexEntity item in ViewBag.listMultiplex)
     {
         <div class="col-sm-3 center-block" style="padding: 15px 15px 15px 15px; background: gray">
             <div class="card" style="width: 18rem;">
@@ -12,7 +12,9 @@
                 <div class="card-body">
                     <h2 class="text-black font-weight-bold">Multiplex:</h2>
                     <p class="card-title">@item</p>
-                    @Html.ActionLink("Esté multiplex", "selectRoom", new { multiplex = item })
+                    @*@Html.Action("Esté multiplex", "selectRoom", new { idMovie = item.idMovie, idRoom = item.idRoom })*@
+                    @Html.ActionLink("Esté multiplex", "selectRoom", new { idMovie = item.idMovie, idRoom = item.idRoom });
+                    @*@Html.RouteLink("Esté multiplex", "Default", new { Controller = "Main", Action = "selectRoom", new { multiplex = @item })*@
                     @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
                 </div>
             </div>
