@@ -301,6 +301,7 @@
     <Content Include="Views\Main\editMovie.cshtml" />
     <Content Include="Views\Main\createMovie.cshtml" />
     <Content Include="Views\Main\selectTicketsOption.cshtml" />
+    <Content Include="Views\Main\selectRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

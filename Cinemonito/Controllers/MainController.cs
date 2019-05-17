@@ -228,14 +228,19 @@ namespace Cinemonito.Controllers
             {
                 var datos = (from MoviesByRoom in db.MoviesByRoom
                              join Movie in db.Movie on MoviesByRoom.IdMovie equals Movie.Id
+                             join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
                              where MoviesByRoom.IdMovie.Equals(idMovie) && MoviesByRoom.IdMovie.Equals(idRoom)
-                             select new
+                             select new Entitys.MoviesByRoom
                              {
+                                 id = (int) MoviesByRoom.IdMovieByRoom,
+                                 idMovie = idMovie,
+                                 idRoom = idRoom,
+                                 nameRoom = Room.Name,
                                  nameMovie = Movie.Name,
                                  horary = MoviesByRoom.Horary
                              }).ToList();
                 //multiplex.nameMovie = datos[0].nameMovie;
-                ViewBag.listMultiplex = datos;
+                ViewBag.MoviesByRoom = datos;
                 return View();
 
             }

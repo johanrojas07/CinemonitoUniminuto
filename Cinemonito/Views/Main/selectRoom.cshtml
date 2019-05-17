@@ -1,0 +1,56 @@
+﻿
+
+
+<h1>Horarios por multiplex</h1>
+
+
+<div class="row">
+    @foreach (Cinemonito.Entitys.MoviesByRoom item in ViewBag.MoviesByRoom)
+    {
+        <div class="col-sm-3" style="padding: 15px 15px 15px 15px">
+            <div class="card text-center mb-3" style="width: 18rem; justify-content: center; display: inline-grid; border-left: 9px solid #ccc!important; border-color: #21e6f3!important; background-color: #a4e8ea!important;">
+                <div class="card-header" style="font-size: 18px; background: #21e6f3!important;">@item.nameMovie</div>
+                <div class="card-body">
+                    <h2 class="text-black font-weight-bold"></h2>
+                    <p>
+                        <b> Horario: </b> @item.horary
+                        <br>
+                        <b> Room: </b> @item.nameRoom
+                    </p>
+
+                    @Html.ActionLink("Comprar Boleta", "searchTicket", "Main", new { idMovie = item.idMovie, idRoom = item.idRoom }, new { @class = "btn btn-success" })
+
+                    @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*<div class="row">
+        @foreach (Cinemonito.Entitys.MultiplexEntity item in ViewBag.listMultiplex)
+        {
+            <div class="col-sm-3 center-block" style="padding: 15px 15px 15px 15px; background: gray">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="./../Images/BigCarrete.Png" alt="Card image cap">
+                    <div class="card-body">
+                        <h2 class="text-black font-weight-bold">Multiplex:</h2>
+                        <p class="card-title">@item</p>
+
+                        @Html.ActionLink("Esté multiplex", "selectRoom", new { idMovie = item.idMovie, idRoom = item.idRoom });
+
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>*@
+
+
+
+
+<div class="row">
+    @Html.ActionLink("Back to List", "buyTickets")
+</div>
