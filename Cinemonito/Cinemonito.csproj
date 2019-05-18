@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Entitys\ChairEntity.cs" />
     <Compile Include="Entitys\EmployeeEntity.cs" />
     <Compile Include="Entitys\MoviesByRoom.cs" />
     <Compile Include="Entitys\MultiplexEntity.cs" />
@@ -302,9 +303,11 @@
     <Content Include="Views\Main\createMovie.cshtml" />
     <Content Include="Views\Main\selectTicketsOption.cshtml" />
     <Content Include="Views\Main\selectRoom.cshtml" />
+    <Content Include="Views\Main\searchChair.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ChairEntity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

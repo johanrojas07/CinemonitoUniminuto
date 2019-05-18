@@ -270,8 +270,47 @@ namespace Cinemonito.Controllers
             }
         }
 
-        
+        public object searchChair(int idMovie, int idRoom, int idMovieByRoom)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var chairGen = (from MoviesByRoom in db.MoviesByRoom
+                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                                where ChairByMovie.IdMovieByRoom == idMovieByRoom
+                                && Chair.IdTypeChair == ((int)1) && ChairByMovie.IsAvailable == true
+                                select new ChairEntity
+                                {
+                                    idChair = (int)Chair.Id,
+                                    isAvalible = ChairByMovie.IsAvailable,
+                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                                    idTypeChair = (int)Chair.IdTypeChair,
+                                    location = Chair.Location,
+                                }
+                    ).ToList();
+                var chairPre = (from MoviesByRoom in db.MoviesByRoom
+                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                                where ChairByMovie.IdMovieByRoom.Equals(idMovieByRoom)
+                                && Chair.IdTypeChair == ((int)2) && ChairByMovie.IsAvailable == true
+                                select new ChairEntity
+                                {
+                                    idChair = (int)Chair.Id,
+                                    isAvalible = ChairByMovie.IsAvailable,
+                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                                    idTypeChair = (int)Chair.IdTypeChair,
+                                    location = Chair.Location,
+                                }
+                   ).ToList();
+                ViewBag.chairGen = chairGen;
+                ViewBag.chairPre = chairPre;
+                return View();
+            }
+        }
 
-        
+
+
+
+
     }
 }

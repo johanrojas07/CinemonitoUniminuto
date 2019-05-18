@@ -18,7 +18,7 @@
                         <b> Room: </b> @item.nameRoom
                     </p>
 
-                    @Html.ActionLink("Comprar Boleta", "searchTicket", "Main", new { idMovie = item.idMovie, idRoom = item.idRoom }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Comprar Boleta", "searchChair", "Main", new { idMovie = item.idMovie, idRoom = item.idRoom, idMovieByRoom = item.id }, new { @class = "btn btn-success" })
 
                     @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
                 </div>
