@@ -32,22 +32,16 @@ namespace Cinemonito.Controllers
         {
             using (var db = new CinemonitoEntities())
             {
-                //var datos = (from Employee in db.Employee
-                //             join Position in db.Position on Employee.IdPosition equals Position.Id
-                //             join Headquarters in db.Headquarters on Employee.IdHeadquarter equals Headquarters.Id
-                //             select new
-                //             {
-                //                 identification = Employee.Identification,
-                //                 name = Employee.Name,
-                //                 phone = Employee.Phone,
-                //                 contractDateInit = Employee.ContractDateInit,
-                //                 contractDateEnd = Employee.ContractDateEnd,
-                //                 salary = Employee.Salary,
-                //                 headquarterName = Headquarters.Name,
-                //                 password = Employee.Password,
-                //                 role = Position.Position1,
-                //             }).ToList();
                 var data = this.getEmployess();
+                return View(data);
+            }
+        }
+
+        public ActionResult movies()
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var data = db.Movie.ToList();
                 return View(data);
             }
         }
@@ -62,21 +56,6 @@ namespace Cinemonito.Controllers
                     db.Employee.Remove(item);
                     db.SaveChanges();
                 }
-                //var datos = (from Employee in db.Employee
-                //             join Position in db.Position on Employee.IdPosition equals Position.Id
-                //             join Headquarters in db.Headquarters on Employee.IdHeadquarter equals Headquarters.Id
-                //             select new
-                //             {
-                //                 identification = Employee.Identification,
-                //                 name = Employee.Name,
-                //                 phone = Employee.Phone,
-                //                 contractDateInit = Employee.ContractDateInit,
-                //                 contractDateEnd = Employee.ContractDateEnd,
-                //                 salary = Employee.Salary,
-                //                 headquarterName = Headquarters.Name,
-                //                 password = Employee.Password,
-                //                 role = Position.Position1,
-                //             }).ToList();
                 var data = this.getEmployess();
                 var mutliplexList = db.Headquarters.ToList();
                 var positionList = db.Position.ToList();
@@ -84,6 +63,21 @@ namespace Cinemonito.Controllers
                 ViewBag.positionList = positionList;
                 //var item2 = db.Employee.ToList();
                 return View("employees", data);
+            }
+        }
+
+        public ActionResult deleteMovie(int id)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.FirstOrDefault(x => x.Id == id);
+                if (item != null)
+                {
+                    db.Movie.Remove(item);
+                    db.SaveChanges();
+                }
+                var data = db.Movie.ToList();
+                return View("movies", data);
             }
         }
 
@@ -99,6 +93,31 @@ namespace Cinemonito.Controllers
                 return View(item);
             } 
         }
+
+        public ActionResult editMovie(int id)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.Where(x => x.Id == id).First();
+                return View(item);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult editMovie(Movie model)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var item = db.Movie.Where(x => x.Id == model.Id).First();
+                item.Classification = model.Classification;
+                item.Name = model.Name;
+                item.Synopsis = model.Synopsis;
+                db.SaveChanges();
+                var data = db.Movie.ToList();
+                return View("movies", data);
+            }
+        }
+
         [HttpPost]
         public ActionResult editEmployee(Employee model)
         {
@@ -114,12 +133,33 @@ namespace Cinemonito.Controllers
                 item.Salary = model.Salary;
                 item.IdHeadquarter = model.IdHeadquarter;
                 item.IdPosition = model.IdPosition;
-
                 db.SaveChanges();
                 var employee = this.getEmployess();
                 return View("employees", employee);
             }
-                
+        }
+
+        public ActionResult createMovie()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult createMovie(Movie model)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var movies = db.Set<Movie>();
+                movies.Add(new Movie
+                {
+                    Name = model.Name,
+                    Classification = model.Classification,
+                    Synopsis = model.Synopsis
+                });
+                db.SaveChanges();
+                var data = db.Movie.ToList();
+                return View("movies", data);
+            }
         }
 
         public ActionResult createEmployee()
@@ -151,12 +191,10 @@ namespace Cinemonito.Controllers
                     IdPosition = model.IdPosition,
                     Password = model.Password,
                 });
-
-        db.SaveChanges();
+                db.SaveChanges();
                 var employeeResponse = this.getEmployess();
                 var mutliplexList = db.Headquarters.ToList();
                 var positionList = db.Position.ToList();
-
                 return View("employees", employeeResponse);
             }
         }
@@ -169,33 +207,40 @@ namespace Cinemonito.Controllers
                              join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
                              join Headquarters in db.Headquarters on Room.IdHeadquarter equals Headquarters.Id
                              where MoviesByRoom.IdMovie.Equals(id)
-                             select new
+                             select new MultiplexEntity
                              {
                                  name = Headquarters.Name,
-                                 id = Headquarters.Id,
+                                 id = (int)Headquarters.Id,
                                  address = Headquarters.Address,
-                                 idMovie = MoviesByRoom.IdMovie,
-                                 idRoom = MoviesByRoom.IdRoom
+                                 idMovie =(int) MoviesByRoom.IdMovie,
+                                 idRoom = (int) MoviesByRoom.IdRoom
                              }).ToList();
+
+
                 ViewBag.listMultiplex = datos;
                 return View();
             }
         }
 
-        public ActionResult selectRoom(MultiplexEntity multiplex)
+        public ActionResult selectRoom(int idMovie, int idRoom)
         {
             using (var db = new CinemonitoEntities())
             {
                 var datos = (from MoviesByRoom in db.MoviesByRoom
                              join Movie in db.Movie on MoviesByRoom.IdMovie equals Movie.Id
-                             where MoviesByRoom.IdMovie.Equals(multiplex.idMovie) && MoviesByRoom.IdMovie.Equals(multiplex.idRoom)
-                             select new
+                             join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
+                             where MoviesByRoom.IdMovie.Equals(idMovie) && MoviesByRoom.IdMovie.Equals(idRoom)
+                             select new Entitys.MoviesByRoom
                              {
+                                 id = (int) MoviesByRoom.IdMovieByRoom,
+                                 idMovie = idMovie,
+                                 idRoom = idRoom,
+                                 nameRoom = Room.Name,
                                  nameMovie = Movie.Name,
                                  horary = MoviesByRoom.Horary
                              }).ToList();
-                multiplex.nameMovie = datos[0].nameMovie;
-                ViewBag.listMultiplex = datos;
+                //multiplex.nameMovie = datos[0].nameMovie;
+                ViewBag.MoviesByRoom = datos;
                 return View();
 
             }
@@ -225,8 +270,47 @@ namespace Cinemonito.Controllers
             }
         }
 
-        
+        public object searchChair(int idMovie, int idRoom, int idMovieByRoom)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var chairGen = (from MoviesByRoom in db.MoviesByRoom
+                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                                where ChairByMovie.IdMovieByRoom == idMovieByRoom
+                                && Chair.IdTypeChair == ((int)1) && ChairByMovie.IsAvailable == true
+                                select new ChairEntity
+                                {
+                                    idChair = (int)Chair.Id,
+                                    isAvalible = ChairByMovie.IsAvailable,
+                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                                    idTypeChair = (int)Chair.IdTypeChair,
+                                    location = Chair.Location,
+                                }
+                    ).ToList();
+                var chairPre = (from MoviesByRoom in db.MoviesByRoom
+                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                                where ChairByMovie.IdMovieByRoom.Equals(idMovieByRoom)
+                                && Chair.IdTypeChair == ((int)2) && ChairByMovie.IsAvailable == true
+                                select new ChairEntity
+                                {
+                                    idChair = (int)Chair.Id,
+                                    isAvalible = ChairByMovie.IsAvailable,
+                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                                    idTypeChair = (int)Chair.IdTypeChair,
+                                    location = Chair.Location,
+                                }
+                   ).ToList();
+                ViewBag.chairGen = chairGen;
+                ViewBag.chairPre = chairPre;
+                return View();
+            }
+        }
 
-        
+
+
+
+
     }
 }

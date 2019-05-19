@@ -1,0 +1,18 @@
+﻿
+
+<div class="container">
+    @foreach (Cinemonito.Entitys.ChairEntity item in ViewBag.chairGen)
+    {
+
+        <div class="justify-content-md-center">
+            <div class="col-md-1" style="background-color: lightgreen ">
+                @item.location
+            </div>
+        </div>
+
+    }
+
+    ViewBag.chairGen = chairGen;
+    ViewBag.chairPre = chairPre;
+</div>
+    
