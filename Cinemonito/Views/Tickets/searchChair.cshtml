@@ -1,0 +1,92 @@
+﻿
+
+<head>
+    <style>
+        .custab {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5% 0;
+            box-shadow: 3px 3px 2px #ccc;
+            transition: 0.5s;
+        }
+        .custab:hover {
+            box-shadow: 3px 3px 0px transparent;
+            transition: 0.5s;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="row col-md-12 custyle" style="margin-top: 18px;">
+                    <table class="table table-striped custab">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>P3</td>
+                            <td>2000</td>
+                            <td class="text-center">
+                                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                                <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                            </td>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">TOTAL: </th>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button class="btn btn-success" style="width: 100%">Comprar Boletas</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row col-md-12 custyle custab">
+                    <div class="row col-md-offset-1 col-md-9" style="color: white; font-size: x-large; background: black; text-align: center; height: 33px; width: 80%;">Pantalla</div>
+                    <div class="row col-md-12">
+                        <h1 class="col-md-1" style="display: flex; justify-content: center; font-weight: bold; font-size: 20px; margin-bottom: 15px; writing-mode: vertical-lr; transform: rotate(180deg); height: 21%; text-align: center;">
+                            General
+                        </h1>
+                        <div class="col-md-11" style="border-top-width: 5px;padding-top: 15px;padding-bottom: 15px;">
+                            @foreach (Cinemonito.Entitys.ChairEntity item in ViewBag.chairGen)
+                            {
+                                <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                    <button style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@(@item.isAvalible ? "#24ff1a" : "red");">@item.location</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <h1 class="col-md-1" style="display: flex; justify-content: center; font-weight: bold; font-size: 20px; margin-bottom: 15px; writing-mode: vertical-lr; transform: rotate(180deg); height: 21%; text-align: center;">
+                            Preferencial
+                        </h1>
+                        <div class="col-md-11" style="border-top-width: 5px;padding-top: 15px;padding-bottom: 15px;">
+                            @foreach (Cinemonito.Entitys.ChairEntity preferencial in ViewBag.chairPre)
+                            {
+                                <div class="col-sm-1" style="    background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                    <button style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@(preferencial.isAvalible ? "#24ff1a" : "red");">@preferencial.location</button>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+    

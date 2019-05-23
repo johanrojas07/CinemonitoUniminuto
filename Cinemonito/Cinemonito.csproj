@@ -134,9 +134,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\SnacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Entitys\ChairEntity.cs" />
     <Compile Include="Entitys\EmployeeEntity.cs" />
     <Compile Include="Entitys\MoviesByRoom.cs" />
@@ -293,22 +296,21 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
-    <Content Include="Views\Main\buyTickets.cshtml" />
+    <Content Include="Views\Tickets\buyTickets.cshtml" />
     <Content Include="Views\Shared\_LayoutMainMenu.cshtml" />
     <Content Include="Views\Snacks\buySnacks.cshtml" />
-    <Content Include="Views\Main\employees.cshtml" />
-    <Content Include="Views\Main\createEmployee.cshtml" />
-    <Content Include="Views\Main\editEmployee.cshtml" />
-    <Content Include="Views\Main\movies.cshtml" />
-    <Content Include="Views\Main\editMovie.cshtml" />
-    <Content Include="Views\Main\createMovie.cshtml" />
-    <Content Include="Views\Main\selectTicketsOption.cshtml" />
-    <Content Include="Views\Main\selectRoom.cshtml" />
-    <Content Include="Views\Main\searchChair.cshtml" />
+    <Content Include="Views\Employee\employees.cshtml" />
+    <Content Include="Views\Employee\createEmployee.cshtml" />
+    <Content Include="Views\Employee\editEmployee.cshtml" />
+    <Content Include="Views\Movie\movies.cshtml" />
+    <Content Include="Views\Movie\editMovie.cshtml" />
+    <Content Include="Views\Movie\createMovie.cshtml" />
+    <Content Include="Views\Tickets\selectTicketsOption.cshtml" />
+    <Content Include="Views\Tickets\selectRoom.cshtml" />
+    <Content Include="Views\Tickets\searchChair.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ChairEntity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
