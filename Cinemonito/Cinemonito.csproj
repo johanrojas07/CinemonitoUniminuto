@@ -216,9 +216,6 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>cinemonitoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>

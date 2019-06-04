@@ -71,37 +71,123 @@ namespace Cinemonito.Controllers
         {
             using (var db = new CinemonitoEntities())
             {
-                var chairGen = (from MoviesByRoom in db.MoviesByRoom
-                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
-                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
-                                where ChairByMovie.IdMovieByRoom == idMovieByRoom
-                                && Chair.IdTypeChair == ((int)1)
-                                select new ChairEntity
-                                {
-                                    idChair = (int)Chair.Id,
-                                    isAvalible = ChairByMovie.IsAvailable,
-                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
-                                    idTypeChair = (int)Chair.IdTypeChair,
-                                    location = Chair.Location,
-                                }
-                    ).ToList();
-                var chairPre = (from MoviesByRoom in db.MoviesByRoom
-                                join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
-                                join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
-                                where ChairByMovie.IdMovieByRoom.Equals(idMovieByRoom)
-                                && Chair.IdTypeChair == ((int)2)
-                                select new ChairEntity
-                                {
-                                    idChair = (int)Chair.Id,
-                                    isAvalible = ChairByMovie.IsAvailable,
-                                    idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
-                                    idTypeChair = (int)Chair.IdTypeChair,
-                                    location = Chair.Location,
-                                }
-                   ).ToList();
+                var chairGen = this.getChairGen(idMovieByRoom);
+                var chairPre = this.getChairPre(idMovieByRoom);
                 ViewBag.chairGen = chairGen;
                 ViewBag.chairPre = chairPre;
+                var model = new List<ChairEntity>();
+                // var silla = new ChairEntity();
+                //model.Add(silla);
+                List<int> arrayChairSelected = new List<int>();
+                ViewBag.chairSelected = model;
+                ViewBag.arrayChairSelected = arrayChairSelected;
                 return View();
+            }
+        }
+
+        public ActionResult selectChair(int idChair, int idMovieByRoom, int chairSelectedId, string chairSelectedArray)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                List<int> arrayChairSelected = System.Web.Helpers.Json.Decode<List<int>>(chairSelectedArray);
+                arrayChairSelected.Add(chairSelectedId);
+
+                List<ChairEntity> chairGen = this.getChairGen(idMovieByRoom);
+                List<ChairEntity> chairPre = this.getChairPre(idMovieByRoom);
+                var model = new List<ChairEntity>();
+
+                List<ChairEntity> allChair = chairGen.Concat(chairPre).ToList();
+
+                chairGen.Clear();
+                chairPre.Clear();
+                foreach (ChairEntity item in allChair)
+                {
+                    foreach (int ids in arrayChairSelected)
+                    {
+                        if (item.Id == ids)
+                        {
+
+                            model.Add(item);
+                            item.isNotAvalibleLocal = true;
+                        }
+                    }
+                    if (item.idTypeChair == 1)
+                    {
+                        chairGen.Add(item);
+                    }
+                    else
+                    {
+                        chairPre.Add(item);
+                    }
+                }
+                //foreach (ChairEntity item in chairPre)
+                //{
+                //    foreach (int ids in arrayChairSelected)
+                //    {
+                //        if (item.Id == ids)
+                //        {
+                //            model.Add(item);
+                //            item.isNotAvalibleLocal = true;
+                //        }
+                //    }
+                //}
+
+
+
+
+                ViewBag.chairGen = chairGen;
+                ViewBag.chairPre = chairPre;
+
+
+                ViewBag.chairSelected = model;
+                ViewBag.arrayChairSelected = arrayChairSelected;
+
+
+                return View("searchChair");
+            }
+        }
+
+        private List<ChairEntity> getChairPre(int idMovieByRoom)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                return (from MoviesByRoom in db.MoviesByRoom
+                        join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                        join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                        where ChairByMovie.IdMovieByRoom.Equals(idMovieByRoom)
+                        && Chair.IdTypeChair == ((int)2)
+                        select new ChairEntity
+                        {
+                            Id = ChairByMovie.Id,
+                            idChair = (int)Chair.Id,
+                            isAvalible = ChairByMovie.IsAvailable,
+                            idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                            idTypeChair = (int)Chair.IdTypeChair,
+                            location = Chair.Location,
+                        }
+                   ).ToList();
+            }
+        }
+
+        private List<ChairEntity> getChairGen(int idMovieByRoom)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                return (from MoviesByRoom in db.MoviesByRoom
+                 join ChairByMovie in db.ChairByMovie on MoviesByRoom.IdMovieByRoom equals ChairByMovie.IdMovieByRoom
+                 join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
+                 where ChairByMovie.IdMovieByRoom == idMovieByRoom
+                 && Chair.IdTypeChair == ((int)1)
+                 select new ChairEntity
+                 {
+                     Id = ChairByMovie.Id,
+                     idChair = (int)Chair.Id,
+                     isAvalible = ChairByMovie.IsAvailable,
+                     idMovieByRoom = (int)ChairByMovie.IdMovieByRoom,
+                     idTypeChair = (int)Chair.IdTypeChair,
+                     location = Chair.Location,
+                 }
+                    ).ToList();
             }
         }
     }

@@ -38,7 +38,6 @@ namespace Cinemonito.Models
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<SaleProducts> SaleProducts { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TypeChair> TypeChair { get; set; }
         public virtual DbSet<TypeHeadquarters> TypeHeadquarters { get; set; }

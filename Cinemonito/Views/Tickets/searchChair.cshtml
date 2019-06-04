@@ -30,14 +30,18 @@
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>P3</td>
-                            <td>2000</td>
-                            <td class="text-center">
-                                <a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                                <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
-                            </td>
-                        </tr>
+                        @foreach (Cinemonito.Entitys.ChairEntity item in ViewBag.chairSelected)
+                        {
+                            <tr>
+
+                                <td>@item.location</td>
+                                <td>3000</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("selectChair", new { id = @item.Id})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                                </td>
+                                
+                            </tr>
+                        }
                         <tfoot>
                             <tr>
                                 <th colspan="2">TOTAL: </th>
@@ -49,7 +53,6 @@
                                 </td>
                             </tr>
                         </tfoot>
-
                     </table>
                 </div>
             </div>
@@ -64,7 +67,7 @@
                             @foreach (Cinemonito.Entitys.ChairEntity item in ViewBag.chairGen)
                             {
                                 <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                    <button style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@(@item.isAvalible ? "#24ff1a" : "red");">@item.location</button>
+                                    <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected)})">@item.location</a>
                                 </div>
                             }
                         </div>
@@ -77,7 +80,7 @@
                             @foreach (Cinemonito.Entitys.ChairEntity preferencial in ViewBag.chairPre)
                             {
                                 <div class="col-sm-1" style="    background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                    <button style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@(preferencial.isAvalible ? "#24ff1a" : "red");">@preferencial.location</button>
+                                    <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @preferencial.idChair,  idMovieByRoom =@preferencial.idMovieByRoom, chairSelectedId= @preferencial.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected)})">@preferencial.location</a>
                                 </div>
                             }
                         </div>
@@ -88,5 +91,8 @@
         </div>
     </div>
 </body>
+
+
+
 
     
