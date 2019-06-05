@@ -216,6 +216,9 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>cinemonitoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
@@ -305,6 +308,7 @@
     <Content Include="Views\Tickets\selectTicketsOption.cshtml" />
     <Content Include="Views\Tickets\selectRoom.cshtml" />
     <Content Include="Views\Tickets\searchChair.cshtml" />
+    <Content Include="Views\Tickets\buyWindowTickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

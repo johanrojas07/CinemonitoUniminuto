@@ -12,14 +12,12 @@ namespace Cinemonito.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChairByMovie
+    public partial class sysdiagrams
     {
-        public long IdMovieByRoom { get; set; }
-        public long IdChair { get; set; }
-        public Nullable<bool> IsAvailable { get; set; }
-        public int Id { get; set; }
-    
-        public virtual Chair Chair { get; set; }
-        public virtual MoviesByRoom MoviesByRoom { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

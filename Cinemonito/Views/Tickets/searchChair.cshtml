@@ -13,6 +13,12 @@
             box-shadow: 3px 3px 0px transparent;
             transition: 0.5s;
         }
+        .not-active {
+            pointer-events: none;
+            cursor: default;
+            text-decoration: none;
+            color: black;
+        }
     </style>
    
 </head>
@@ -35,9 +41,9 @@
                             <tr>
 
                                 <td>@item.location</td>
-                                <td>3000</td>
+                                <td>@item.price</td>
                                 <td class="text-center">
-                                    <a href="@Url.Action("selectChair", new { id = @item.Id})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                                    <a href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
                                 </td>
                                 
                             </tr>
@@ -45,11 +51,11 @@
                         <tfoot>
                             <tr>
                                 <th colspan="2">TOTAL: </th>
-                                <td>2000</td>
+                                <td>@ViewBag.totalPrice </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
-                                    <button class="btn btn-success" style="width: 100%">Comprar Boletas</button>
+                                <td colspan="3">    
+                                    <a class="btn btn-success" style="width: 100%">Comprar Boletas</a>
                                 </td>
                             </tr>
                         </tfoot>
@@ -66,9 +72,19 @@
                         <div class="col-md-11" style="border-top-width: 5px;padding-top: 15px;padding-bottom: 15px;">
                             @foreach (Cinemonito.Entitys.ChairEntity item in ViewBag.chairGen)
                             {
-                                <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                    <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected)})">@item.location</a>
-                                </div>
+                                if (@item.isAvalible && @item.isNotAvalibleLocal != true)
+                                {
+                                    <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@item.location</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");">@item.location</a>
+                                    </div>
+                                }
+
                             }
                         </div>
                     </div>
@@ -79,9 +95,19 @@
                         <div class="col-md-11" style="border-top-width: 5px;padding-top: 15px;padding-bottom: 15px;">
                             @foreach (Cinemonito.Entitys.ChairEntity preferencial in ViewBag.chairPre)
                             {
-                                <div class="col-sm-1" style="    background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                    <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @preferencial.idChair,  idMovieByRoom =@preferencial.idMovieByRoom, chairSelectedId= @preferencial.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected)})">@preferencial.location</a>
-                                </div>
+                                if (@preferencial.isAvalible && @preferencial.isNotAvalibleLocal != true)
+                                {
+                                    <div class="col-sm-1" style="background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @preferencial.idChair,  idMovieByRoom =@preferencial.idMovieByRoom, chairSelectedId= @preferencial.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@preferencial.location</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-1" style="background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");">@preferencial.location</a>
+                                    </div>
+                                }
+
                             }
                         </div>
 
