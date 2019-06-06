@@ -13,12 +13,8 @@
           <Property Name="Location" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdTypeChair" Type="bigint" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Cinemonito.dbo.ChairByMovie' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ChairByMovie">
           <Key>
-            <PropertyRef Name="IdMovieByRoom" />
-            <PropertyRef Name="IdChair" />
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="IdMovieByRoom" Type="bigint" Nullable="false" />
@@ -449,6 +445,7 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
         </Association>
         <EntityContainer Name="CinemonitoModelStoreContainer">
           <EntitySet Name="Chair" EntityType="Self.Chair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChairByMovie" EntityType="Self.ChairByMovie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Headquarters" EntityType="Self.Headquarters" Schema="dbo" store:Type="Tables" />
@@ -462,14 +459,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeChair" EntityType="Self.TypeChair" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeHeadquarters" EntityType="Self.TypeHeadquarters" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChairByMovie" EntityType="Self.ChairByMovie" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ChairByMovie].[IdMovieByRoom] AS [IdMovieByRoom], 
-    [ChairByMovie].[IdChair] AS [IdChair], 
-    [ChairByMovie].[IsAvailable] AS [IsAvailable], 
-    [ChairByMovie].[Id] AS [Id]
-    FROM [dbo].[ChairByMovie] AS [ChairByMovie]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="DetailSaleProducts" EntityType="Self.DetailSaleProducts" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DetailSaleProducts].[IdSale] AS [IdSale], 
@@ -636,7 +625,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <EntitySet Name="Ticket" EntityType="CinemonitoModel.Ticket" />
           <EntitySet Name="TypeChair" EntityType="CinemonitoModel.TypeChair" />
           <EntitySet Name="TypeHeadquarters" EntityType="CinemonitoModel.TypeHeadquarters" />
-          <EntitySet Name="ChairByMovie" EntityType="CinemonitoModel.ChairByMovie" />
           <EntitySet Name="DetailSaleProducts" EntityType="CinemonitoModel.DetailSaleProducts" />
           <EntitySet Name="EmployeeByHeadquarter" EntityType="CinemonitoModel.EmployeeByHeadquarter" />
           <EntitySet Name="PrizeTicket" EntityType="CinemonitoModel.PrizeTicket" />
@@ -644,10 +632,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <AssociationSet Name="FK_Chair_TypeChair" Association="CinemonitoModel.FK_Chair_TypeChair">
             <End Role="TypeChair" EntitySet="TypeChair" />
             <End Role="Chair" EntitySet="Chair" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChairByMovie_Chair" Association="CinemonitoModel.FK_ChairByMovie_Chair">
-            <End Role="Chair" EntitySet="Chair" />
-            <End Role="ChairByMovie" EntitySet="ChairByMovie" />
           </AssociationSet>
           <AssociationSet Name="FK_PrizeTicket_Client" Association="CinemonitoModel.FK_PrizeTicket_Client">
             <End Role="Client" EntitySet="Client" />
@@ -689,10 +673,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
             <End Role="Movie" EntitySet="Movie" />
             <End Role="MoviesByRoom" EntitySet="MoviesByRoom" />
           </AssociationSet>
-          <AssociationSet Name="FK_ChairByMovie_MoviesByRoom" Association="CinemonitoModel.FK_ChairByMovie_MoviesByRoom">
-            <End Role="MoviesByRoom" EntitySet="MoviesByRoom" />
-            <End Role="ChairByMovie" EntitySet="ChairByMovie" />
-          </AssociationSet>
           <AssociationSet Name="FK_MoviesByRoom_Room" Association="CinemonitoModel.FK_MoviesByRoom_Room">
             <End Role="Room" EntitySet="Room" />
             <End Role="MoviesByRoom" EntitySet="MoviesByRoom" />
@@ -716,6 +696,15 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <AssociationSet Name="RoleByPosition" Association="CinemonitoModel.RoleByPosition">
             <End Role="Position" EntitySet="Position" />
             <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <EntitySet Name="ChairByMovie" EntityType="CinemonitoModel.ChairByMovie" />
+          <AssociationSet Name="FK_ChairByMovie_Chair" Association="CinemonitoModel.FK_ChairByMovie_Chair">
+            <End Role="Chair" EntitySet="Chair" />
+            <End Role="ChairByMovie" EntitySet="ChairByMovie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChairByMovie_MoviesByRoom" Association="CinemonitoModel.FK_ChairByMovie_MoviesByRoom">
+            <End Role="MoviesByRoom" EntitySet="MoviesByRoom" />
+            <End Role="ChairByMovie" EntitySet="ChairByMovie" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -800,9 +789,9 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <Property Name="IdMovie" Type="Int64" Nullable="false" />
           <Property Name="Horary" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Movie" Relationship="CinemonitoModel.FK_MoviesByRoom_Movie" FromRole="MoviesByRoom" ToRole="Movie" />
-          <NavigationProperty Name="ChairByMovie" Relationship="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" FromRole="MoviesByRoom" ToRole="ChairByMovie" />
           <NavigationProperty Name="Room" Relationship="CinemonitoModel.FK_MoviesByRoom_Room" FromRole="MoviesByRoom" ToRole="Room" />
           <NavigationProperty Name="Ticket" Relationship="CinemonitoModel.FK_Ticket_MoviesByRoom" FromRole="MoviesByRoom" ToRole="Ticket" />
+          <NavigationProperty Name="ChairByMovie" Relationship="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" FromRole="MoviesByRoom" ToRole="ChairByMovie" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -885,19 +874,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Headquarters" Relationship="CinemonitoModel.FK_Headquarters_TypeHeadquarters" FromRole="TypeHeadquarters" ToRole="Headquarters" />
         </EntityType>
-        <EntityType Name="ChairByMovie">
-          <Key>
-            <PropertyRef Name="IdMovieByRoom" />
-            <PropertyRef Name="IdChair" />
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="IdMovieByRoom" Type="Int64" Nullable="false" />
-          <Property Name="IdChair" Type="Int64" Nullable="false" />
-          <Property Name="IsAvailable" Type="Boolean" />
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Chair" Relationship="CinemonitoModel.FK_ChairByMovie_Chair" FromRole="ChairByMovie" ToRole="Chair" />
-          <NavigationProperty Name="MoviesByRoom" Relationship="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" FromRole="ChairByMovie" ToRole="MoviesByRoom" />
-        </EntityType>
         <EntityType Name="DetailSaleProducts">
           <Key>
             <PropertyRef Name="IdSale" />
@@ -958,18 +934,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
             </Principal>
             <Dependent Role="Chair">
               <PropertyRef Name="IdTypeChair" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChairByMovie_Chair">
-          <End Type="CinemonitoModel.Chair" Role="Chair" Multiplicity="1" />
-          <End Type="CinemonitoModel.ChairByMovie" Role="ChairByMovie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Chair">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChairByMovie">
-              <PropertyRef Name="IdChair" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1093,18 +1057,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ChairByMovie_MoviesByRoom">
-          <End Type="CinemonitoModel.MoviesByRoom" Role="MoviesByRoom" Multiplicity="1" />
-          <End Type="CinemonitoModel.ChairByMovie" Role="ChairByMovie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MoviesByRoom">
-              <PropertyRef Name="IdMovieByRoom" />
-            </Principal>
-            <Dependent Role="ChairByMovie">
-              <PropertyRef Name="IdMovieByRoom" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MoviesByRoom_Room">
           <End Type="CinemonitoModel.Room" Role="Room" Multiplicity="1" />
           <End Type="CinemonitoModel.MoviesByRoom" Role="MoviesByRoom" Multiplicity="*" />
@@ -1168,6 +1120,41 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
         <Association Name="RoleByPosition">
           <End Type="CinemonitoModel.Position" Role="Position" Multiplicity="*" />
           <End Type="CinemonitoModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ChairByMovie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdMovieByRoom" Type="Int64" Nullable="false" />
+          <Property Name="IdChair" Type="Int64" Nullable="false" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Chair" Relationship="CinemonitoModel.FK_ChairByMovie_Chair" FromRole="ChairByMovie" ToRole="Chair" />
+          <NavigationProperty Name="MoviesByRoom" Relationship="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" FromRole="ChairByMovie" ToRole="MoviesByRoom" />
+        </EntityType>
+        <Association Name="FK_ChairByMovie_Chair">
+          <End Type="CinemonitoModel.Chair" Role="Chair" Multiplicity="1" />
+          <End Type="CinemonitoModel.ChairByMovie" Role="ChairByMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chair">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChairByMovie">
+              <PropertyRef Name="IdChair" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChairByMovie_MoviesByRoom">
+          <End Type="CinemonitoModel.MoviesByRoom" Role="MoviesByRoom" Multiplicity="1" />
+          <End Type="CinemonitoModel.ChairByMovie" Role="ChairByMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MoviesByRoom">
+              <PropertyRef Name="IdMovieByRoom" />
+            </Principal>
+            <Dependent Role="ChairByMovie">
+              <PropertyRef Name="IdMovieByRoom" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1316,16 +1303,6 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ChairByMovie">
-            <EntityTypeMapping TypeName="CinemonitoModel.ChairByMovie">
-              <MappingFragment StoreEntitySet="ChairByMovie">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
-                <ScalarProperty Name="IdChair" ColumnName="IdChair" />
-                <ScalarProperty Name="IdMovieByRoom" ColumnName="IdMovieByRoom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DetailSaleProducts">
             <EntityTypeMapping TypeName="CinemonitoModel.DetailSaleProducts">
               <MappingFragment StoreEntitySet="DetailSaleProducts">
@@ -1372,6 +1349,16 @@ advertencia 6002: La tabla o vista 'Cinemonito.dbo.RoleByPosition' no tiene defi
               <ScalarProperty Name="Id" ColumnName="IdPosition" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ChairByMovie">
+            <EntityTypeMapping TypeName="CinemonitoModel.ChairByMovie">
+              <MappingFragment StoreEntitySet="ChairByMovie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="IdChair" ColumnName="IdChair" />
+                <ScalarProperty Name="IdMovieByRoom" ColumnName="IdMovieByRoom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

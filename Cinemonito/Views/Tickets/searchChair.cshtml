@@ -54,8 +54,15 @@
                                 <td>@ViewBag.totalPrice </td>
                             </tr>
                             <tr>
-                                <td colspan="3">    
-                                    <a class="btn btn-success" style="width: 100%">Comprar Boletas</a>
+                                <td colspan="3">
+                                    @if (ViewBag.chairSelected == null)
+                                    {
+                                        <a class="btn btn-success" style="width: 100%">Comprar Boletas</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("buyWindowTickets", new { idMovieByRoom = @ViewBag.idMovieByRoom, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-success" style="width: 100%">Comprar Boletas</a>
+                                    }
                                 </td>
                             </tr>
                         </tfoot>

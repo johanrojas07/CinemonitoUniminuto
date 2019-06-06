@@ -141,7 +141,9 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Entitys\ChairEntity.cs" />
+    <Compile Include="Entitys\AllDataInforEntity.cs" />
     <Compile Include="Entitys\EmployeeEntity.cs" />
+    <Compile Include="Entitys\ClientEntity.cs" />
     <Compile Include="Entitys\MoviesByRoom.cs" />
     <Compile Include="Entitys\MultiplexEntity.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,9 +218,6 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>cinemonitoModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Ticket.cs">
       <DependentUpon>cinemonitoModel.tt</DependentUpon>
     </Compile>
@@ -268,6 +267,7 @@
     <Content Include="Models\cinemonitoModel.edmx.diagram">
       <DependentUpon>cinemonitoModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -281,7 +281,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Styles\creative.css" />
     <Content Include="Styles\creative.min.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

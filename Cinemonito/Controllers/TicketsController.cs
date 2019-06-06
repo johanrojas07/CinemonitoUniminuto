@@ -133,19 +133,26 @@ namespace Cinemonito.Controllers
                 ViewBag.chairPre = chairPre;
                 ViewBag.chairSelected = model;
                 ViewBag.arrayChairSelected = arrayChairSelected;
+                ViewBag.idMovieByRoom = idMovieByRoom;
+
                 return View("searchChair");
             }
         }
 
-        public ActionResult buyWindowTickets(int idMovieByRoom, string chairSelectedArray )
+        public ActionResult buyWindowTickets(int idMovieByRoom, string chairSelectedArray)
         {
             using (var db = new CinemonitoEntities())
             {
+                var idClient = 1;
                 var isValidsChairs = new List<ChairEntity>();
                 var isNotValidsChairs = new List<ChairEntity>();
-
+                var valorSillas = 0;
+                var discountSilla = 0;
+                var puntosCliente = 0;
+                var freeTicketsWithPoints = 0;
                 List<int> arrayChairSelected = System.Web.Helpers.Json.Decode<List<int>>(chairSelectedArray);
                 bool isValid = true;
+                List<int> allValidchair = new List<int>();
                 foreach (int ids in arrayChairSelected)
                 {
                     var chairSelect = db.ChairByMovie.FirstOrDefault(x => x.Id == ids);
@@ -153,25 +160,95 @@ namespace Cinemonito.Controllers
 
                     if ((bool)chairSelect.IsAvailable) {
                         isValidsChairs.Add(chairAllData);
-
-                        chairSelect.IsAvailable = false;
+                        allValidchair.Add(ids);
+                        valorSillas = valorSillas + chairAllData.price;
+                        discountSilla = (discountSilla < chairAllData.price) ? chairAllData.price : discountSilla;
+                        puntosCliente = puntosCliente + 10;
                     } else {
                         isNotValidsChairs.Add(chairAllData);
-
-
                         isValid = false;
                     }
                 }
                 if (isValid)
                 {
-                    db.SaveChanges();
+                    this.addPoints(puntosCliente, idClient);
+                    freeTicketsWithPoints = this.getFreeTickets(idClient);
+                    if (freeTicketsWithPoints >0)
+                    {
+                        valorSillas = valorSillas - (freeTicketsWithPoints * discountSilla);
+                    }
+                    this.compraBoletas(allValidchair);
                 }
+                ViewBag.client = (from Clientes in db.Client
+                                   where Clientes.Id == idClient
+                                  select new ClientEntity
+                                   {
+                                       id = (int)Clientes.Id,
+                                       nombre = Clientes.Name,
+                                       identificacion = Clientes.Identification,
+                                       totalPoints = Clientes.TotalPoints
+                                   }).FirstOrDefault();
+
+                ViewBag.totalPrice = valorSillas;
+                ViewBag.isValidsChairs = isValidsChairs;
+                ViewBag.isNotValidsChairs = isNotValidsChairs;
+                ViewBag.arrayChairSelected = arrayChairSelected;
+                ViewBag.idMovieByRoom = idMovieByRoom;
+                ViewBag.ReturnDate = System.DateTime.Now;
+                ViewBag.allData = this.getAllData(idMovieByRoom);
+                ViewBag.isValid = isValid;
+                ViewBag.puntosCliente = puntosCliente;
+                ViewBag.freeTicketsWithPoints = freeTicketsWithPoints;
 
                 return View("buyWindowTickets");
             }
         }
 
-        private ChairEntity getOneChair(int idMovieByRoom, int idChair)
+        private int getFreeTickets(int idClient)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                int freeticket = 0;
+                var request = db.Client.Single(c => c.Id == idClient);
+
+                while (request.TotalPoints >= 100)
+                {
+                    freeticket = freeticket + 1;
+                    request.TotalPoints = request.TotalPoints - 100;
+                }
+
+                db.SaveChanges();
+                return freeticket;
+            }
+        }
+
+        private bool addPoints(int puntosCliente, int idClient)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                var request = db.Client.Single(c => c.Id == idClient);
+                request.TotalPoints = request.TotalPoints + puntosCliente;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        private bool compraBoletas(List<int> allValidchair)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                foreach (int ids in allValidchair)
+                {
+                    var request = db.ChairByMovie.Single(c => c.Id == ids);
+                    request.IsAvailable = false;
+                    
+                }
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        private ChairEntity getOneChair(int idMovieByRoom, int Id)
         {
             using (var db = new CinemonitoEntities())
             {
@@ -180,7 +257,7 @@ namespace Cinemonito.Controllers
                         join Chair in db.Chair on ChairByMovie.IdChair equals Chair.Id
                         join TypeChair in db.TypeChair on Chair.IdTypeChair equals TypeChair.Id
                         where ChairByMovie.IdMovieByRoom.Equals(idMovieByRoom)
-                        && ChairByMovie.IdChair == idChair
+                        && ChairByMovie.Id == Id
                         select new ChairEntity
                         {
                             Id = ChairByMovie.Id,
@@ -194,6 +271,8 @@ namespace Cinemonito.Controllers
                         }).FirstOrDefault();
             }
         }
+
+        
 
 
         private List<ChairEntity> getChairPre(int idMovieByRoom)
@@ -243,5 +322,25 @@ namespace Cinemonito.Controllers
                  }).ToList();
             }
         }
+        private AllDataInforEntity getAllData(int idMovieByRoom)
+        {
+            using (var db = new CinemonitoEntities())
+            {
+                return (from MoviesByRoom in db.MoviesByRoom
+                        join Room in db.Room on MoviesByRoom.IdRoom equals Room.Id
+                        join Headquarters in db.Headquarters on Room.IdHeadquarter equals Headquarters.Id
+                        where MoviesByRoom.IdMovieByRoom == idMovieByRoom
+                        select new AllDataInforEntity
+                        {
+                            horary = MoviesByRoom.Horary,
+                            nameSala = Room.Name,
+                            nameMultiplex = Headquarters.Name,
+                            addressMultiplex = Headquarters.Address
+                        }).FirstOrDefault();
+            }
+        }
+
+
+        
     }
 }

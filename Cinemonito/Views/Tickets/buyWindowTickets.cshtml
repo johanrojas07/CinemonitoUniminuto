@@ -4,11 +4,227 @@
 
 <html>
 <head>
+    <style>
+
+        strong {
+            font-weight: bold;
+        }
+
+
+        table {
+            background: #f5f5f5;
+            border-collapse: separate;
+            box-shadow: inset 0 1px 0 #fff;
+            font-size: 12px;
+            line-height: 24px;
+            margin: 30px auto;
+            text-align: left;
+            width: 800px;
+        }
+
+        th {
+ 
+            border-left: 1px solid #555;
+            border-right: 1px solid #777;
+            border-top: 1px solid #555;
+            border-bottom: 1px solid #333;
+            box-shadow: inset 0 1px 0 #999;
+            font-weight: bold;
+            padding: 10px 15px;
+            position: relative;
+            text-shadow: 0 1px 0 #000;
+        }
+
+            th:after {
+                background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+                content: '';
+                display: block;
+                height: 25%;
+                left: 0;
+                margin: 1px 0 0 0;
+                position: absolute;
+                top: 25%;
+                width: 100%;
+            }
+
+            th:first-child {
+                border-left: 1px solid #777;
+                box-shadow: inset 1px 1px 0 #999;
+            }
+
+            th:last-child {
+                box-shadow: inset -1px 1px 0 #999;
+            }
+
+        td {
+            border-right: 1px solid #fff;
+            border-left: 1px solid #e8e8e8;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 10px 15px;
+            position: relative;
+            transition: all 300ms;
+        }
+
+            td:first-child {
+                box-shadow: inset 1px 0 0 #fff;
+            }
+
+            td:last-child {
+                border-right: 1px solid #e8e8e8;
+                box-shadow: inset -1px 0 0 #fff;
+            }
+
+
+            tr:last-of-type td {
+                box-shadow: inset 0 -1px 0 #fff;
+            }
+
+                tr:last-of-type td:first-child {
+                    box-shadow: inset 1px -1px 0 #fff;
+                }
+
+                tr:last-of-type td:last-child {
+                    box-shadow: inset -1px -1px 0 #fff;
+                }
+
+    </style>
     <meta name="viewport" content="width=device-width" />
     <title>buyWindowTickets</title>
 </head>
 <body>
-    <div> 
+    <div class="container" style="width: 59%; margin-top: 8%; background: #b8c1ea;">
+        <div class="card">
+            <div class="card-header" style="margin-top: 10px;">
+                Fecha
+                <strong>@ViewBag.ReturnDate</strong>
+                <span class="float-right" style="padding-left: 100px;"> <strong>Factura</strong></span>
+
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <div class="row mb-4" style="margin-left: 0px; margin-right: 0px">
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">De:</h6>
+                        <div>
+                            <strong>@ViewBag.allData.nameMultiplex</strong>
+                        </div>
+                        <div>@ViewBag.allData.nameSala</div>
+                        <div>@ViewBag.allData.horary</div>
+                        <div>@ViewBag.allData.addressMultiplex</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">Para:</h6>
+                        <div>
+                            <strong>@ViewBag.client.nombre</strong>
+                        </div>
+                        <div>@ViewBag.client.identificacion</div>
+                        <div><strong>Puntos Totales: </strong>@ViewBag.client.totalPoints</div>
+                        <div></div>
+                    </div>
+                </div>
+
+                @if (@ViewBag.isValid)
+                {
+                    <div style="margin-top: 18px; font-weight: 900;">
+                        <span>Compra Exitosa</span>
+                    </div>
+                }
+                else
+                {
+                    <div style="margin-top: 18px; font-weight: 900;">
+                        <span>Para terminar la compra deben estar habilitadas(Color verde) todas las sillas. Clic en volver</span>
+                    </div>
+                }
+
+                <div class="table-responsive-sm">
+                    <table class="table table-clear">
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Locacion</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        @if (@ViewBag.isNotValidsChairs != null)
+                        {
+                            @Html.Raw("<tbody>")
+                            foreach (Cinemonito.Entitys.ChairEntity item in @ViewBag.isNotValidsChairs)
+                            {
+                                <tr style="background: #f87777;">
+                                    <td class="center">@item.description</td>
+                                    <td class="center">@item.location</td>
+                                    <td class="left strong">@item.price</td>
+                                </tr>
+
+                            }
+                            @Html.Raw("</tbody>")
+                        }
+                        @if (@ViewBag.isValidsChairs != null)
+                        {
+                            @Html.Raw("<tbody>")
+
+                            foreach (Cinemonito.Entitys.ChairEntity item in @ViewBag.isValidsChairs)
+                            {
+                                <tr style="  background: #4dd94d;">
+                                    <td class="center">@item.description</td>
+                                    <td class="center">@item.location</td>
+                                    <td class="left strong">@item.price</td>
+                                </tr>
+                            }
+                            @Html.Raw("</tbody>")
+                        }
+
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-5">
+
+                    </div>
+
+                    <div class="col-lg-4 col-sm-5 ml-auto">
+                        <table class="table table-clear">
+                            <tbody>
+                                <tr>
+                                    <td class="left" style="border: #819aff  2px solid;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="right" style="border: #819aff 2px solid;">
+                                        <strong>$@ViewBag.totalPrice</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="left" style="border: #819aff 2px solid;">
+                                        <strong>Puntos al usuario</strong>
+                                    </td>
+                                    <td class="right" style="border: #819aff 2px solid;">
+                                        <strong>@ViewBag.puntosCliente</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="left" style="border: #819aff 2px solid;">
+                                        <strong>Boletas Gratis</strong>
+                                    </td>
+                                    <td class="right" style="border: #819aff 2px solid;">
+                                        <strong>@ViewBag.freeTicketsWithPoints</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        @if (@ViewBag.isValid)
+        {
+            <a href="@Url.Action("buyTickets", "Tickets")" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px;">Finalizar Compra</a>
+        }
+        else
+        {
+           // @Html.ActionLink("Compra de boletas", "buyTickets", "Tickets")
+            <a href="@Url.Action("selectChair", new { idChair = -1, idMovieByRoom = @ViewBag.idMovieByRoom, chairSelectedId= -1, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px;">Volver</a>
+        }
     </div>
 </body>
 </html>
