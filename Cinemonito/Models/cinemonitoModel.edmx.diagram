@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="CinemonitoModel.Role" Width="1.5" PointX="3" PointY="16.75" />
         <EntityTypeShape EntityType="CinemonitoModel.Room" Width="1.5" PointX="5.25" PointY="7" />
         <EntityTypeShape EntityType="CinemonitoModel.SaleProducts" Width="1.5" PointX="5.25" PointY="15.75" />
-        <EntityTypeShape EntityType="CinemonitoModel.Ticket" Width="1.5" PointX="9.75" PointY="7.125" />
         <EntityTypeShape EntityType="CinemonitoModel.TypeChair" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="CinemonitoModel.TypeHeadquarters" Width="1.5" PointX="0.75" PointY="8.875" />
         <EntityTypeShape EntityType="CinemonitoModel.DetailSaleProducts" Width="1.5" PointX="7.5" PointY="15.875" />
@@ -25,7 +24,6 @@
         <EntityTypeShape EntityType="CinemonitoModel.ProductsByHeadquarters" Width="1.5" PointX="8.25" PointY="10.625" />
         <AssociationConnector Association="CinemonitoModel.FK_Chair_TypeChair" />
         <AssociationConnector Association="CinemonitoModel.FK_PrizeTicket_Client" />
-        <AssociationConnector Association="CinemonitoModel.FK_Ticket_Client" />
         <AssociationConnector Association="CinemonitoModel.FK_Employee_Position" />
         <AssociationConnector Association="CinemonitoModel.FK_EmployeeByHeadquarter_Employee" />
         <AssociationConnector Association="CinemonitoModel.FK_EmployeeByHeadquarter_Headquarters" />
@@ -35,7 +33,6 @@
         <AssociationConnector Association="CinemonitoModel.FK_SaleProducts_Headquarters" />
         <AssociationConnector Association="CinemonitoModel.FK_MoviesByRoom_Movie" />
         <AssociationConnector Association="CinemonitoModel.FK_MoviesByRoom_Room" />
-        <AssociationConnector Association="CinemonitoModel.FK_Ticket_MoviesByRoom" />
         <AssociationConnector Association="CinemonitoModel.FK_DetailSaleProducts_Product" />
         <AssociationConnector Association="CinemonitoModel.FK_ProdcutsByHeadquarters_Product" />
         <AssociationConnector Association="CinemonitoModel.FK_DetailSaleProducts_SaleProducts" />
@@ -43,6 +40,9 @@
         <EntityTypeShape EntityType="CinemonitoModel.ChairByMovie" Width="1.5" PointX="9.75" PointY="3.25" />
         <AssociationConnector Association="CinemonitoModel.FK_ChairByMovie_Chair" />
         <AssociationConnector Association="CinemonitoModel.FK_ChairByMovie_MoviesByRoom" />
+        <EntityTypeShape EntityType="CinemonitoModel.Ticket" Width="1.5" PointX="9.75" PointY="13.875" />
+        <AssociationConnector Association="CinemonitoModel.FK_Ticket_Client" />
+        <AssociationConnector Association="CinemonitoModel.FK_Ticket_MoviesByRoom" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,7 +18,7 @@
                         <br>
                     </p>
                  
-                    @Html.ActionLink("Esté multiplex", "selectRoom", "Tickets", new { idMovie = item.idMovie, idRoom = item.idRoom }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Esté multiplex", "selectRoom", "Tickets", new { idMovie = item.idMovie, idRoom = item.idRoom, idClient = @ViewBag.idClient }, new { @class = "btn btn-success" })
 
                     @*<a class="btn btn-primary btn-xl js-scroll-trigger" href="">COMPRAR</a>*@
                 </div>

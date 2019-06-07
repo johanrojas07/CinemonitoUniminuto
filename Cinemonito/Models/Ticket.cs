@@ -18,6 +18,7 @@ namespace Cinemonito.Models
         public long IdClient { get; set; }
         public long IdMovieByRoom { get; set; }
         public int Quantity { get; set; }
+        public int IdChair { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual MoviesByRoom MoviesByRoom { get; set; }

@@ -43,7 +43,7 @@
                                 <td>@item.location</td>
                                 <td>@item.price</td>
                                 <td class="text-center">
-                                    <a href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                                    <a href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, idClient = @ViewBag.idClient, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>
                                 </td>
                                 
                             </tr>
@@ -61,7 +61,7 @@
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("buyWindowTickets", new { idMovieByRoom = @ViewBag.idMovieByRoom, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-success" style="width: 100%">Comprar Boletas</a>
+                                        <a href="@Url.Action("buyWindowTickets", new { idMovieByRoom = @ViewBag.idMovieByRoom,  idClient = @ViewBag.idClient, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = true})" class="btn btn-success" style="width: 100%">Comprar Boletas</a>
                                     }
                                 </td>
                             </tr>
@@ -82,7 +82,7 @@
                                 if (@item.isAvalible && @item.isNotAvalibleLocal != true)
                                 {
                                     <div class="col-sm-1" style=" background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@item.location</a>
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@item.isAvalible) ? ((@item.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @item.idChair, idMovieByRoom = @item.idMovieByRoom, chairSelectedId= @item.Id,  idClient = @ViewBag.idClient, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@item.location</a>
                                     </div>
                                 }
                                 else
@@ -105,7 +105,7 @@
                                 if (@preferencial.isAvalible && @preferencial.isNotAvalibleLocal != true)
                                 {
                                     <div class="col-sm-1" style="background-color: #d0d6d0; display: flex; align-items: center; width: 13%; justify-content: center; padding: 15px;">
-                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @preferencial.idChair,  idMovieByRoom =@preferencial.idMovieByRoom, chairSelectedId= @preferencial.Id, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@preferencial.location</a>
+                                        <a style="width: 100%; font-weight: 900; color: white; padding: 5px; background-color:@((@preferencial.isAvalible) ? ((@preferencial.isNotAvalibleLocal == true) ? "black" : "#24ff1a") : "red");" href="@Url.Action("selectChair", new { idChair = @preferencial.idChair,  idMovieByRoom =@preferencial.idMovieByRoom, chairSelectedId= @preferencial.Id,  idClient = @ViewBag.idClient, chairSelectedArray = Json.Encode(ViewBag.arrayChairSelected), delete = false})">@preferencial.location</a>
                                     </div>
                                 }
                                 else

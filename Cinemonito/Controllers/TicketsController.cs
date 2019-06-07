@@ -20,7 +20,7 @@ namespace Cinemonito.Controllers
             }
         }
 
-        public ActionResult selectTicketsOption(int id)
+        public ActionResult selectTicketsOption(int id, int idClient)
         {
             using (var db = new CinemonitoEntities())
             {
@@ -36,14 +36,13 @@ namespace Cinemonito.Controllers
                                  idMovie = (int)MoviesByRoom.IdMovie,
                                  idRoom = (int)MoviesByRoom.IdRoom
                              }).ToList();
-
-
+                ViewBag.idClient = idClient;
                 ViewBag.listMultiplex = datos;
                 return View();
             }
         }
 
-        public ActionResult selectRoom(int idMovie, int idRoom)
+        public ActionResult selectRoom(int idMovie, int idRoom, int idClient)
         {
             using (var db = new CinemonitoEntities())
             {
@@ -61,13 +60,14 @@ namespace Cinemonito.Controllers
                                  horary = MoviesByRoom.Horary
                              }).ToList();
                 //multiplex.nameMovie = datos[0].nameMovie;
+                ViewBag.idClient = idClient;
                 ViewBag.MoviesByRoom = datos;
                 return View();
 
             }
         }
 
-        public object searchChair(int idMovie, int idRoom, int idMovieByRoom)
+        public object searchChair(int idMovie, int idRoom, int idMovieByRoom, int idClient)
         {
             using (var db = new CinemonitoEntities())
             {
@@ -79,13 +79,15 @@ namespace Cinemonito.Controllers
                 // var silla = new ChairEntity();
                 //model.Add(silla);
                 List<int> arrayChairSelected = new List<int>();
+
+                ViewBag.idClient = idClient;
                 ViewBag.chairSelected = model;
                 ViewBag.arrayChairSelected = arrayChairSelected;
                 return View();
             }
         }
 
-        public ActionResult selectChair(int idChair, int idMovieByRoom, int chairSelectedId, string chairSelectedArray, bool delete)
+        public ActionResult selectChair(int idChair, int idMovieByRoom, int chairSelectedId, int idClient, string chairSelectedArray, bool delete)
         {
             using (var db = new CinemonitoEntities())
             {
@@ -130,6 +132,7 @@ namespace Cinemonito.Controllers
                 }
                 ViewBag.totalPrice = valorSillas;
                 ViewBag.chairGen = chairGen;
+                ViewBag.idClient = idClient;
                 ViewBag.chairPre = chairPre;
                 ViewBag.chairSelected = model;
                 ViewBag.arrayChairSelected = arrayChairSelected;
@@ -139,11 +142,10 @@ namespace Cinemonito.Controllers
             }
         }
 
-        public ActionResult buyWindowTickets(int idMovieByRoom, string chairSelectedArray)
+        public ActionResult buyWindowTickets(int idMovieByRoom, int idClient, string chairSelectedArray)
         {
             using (var db = new CinemonitoEntities())
             {
-                var idClient = 1;
                 var isValidsChairs = new List<ChairEntity>();
                 var isNotValidsChairs = new List<ChairEntity>();
                 var valorSillas = 0;
@@ -177,7 +179,7 @@ namespace Cinemonito.Controllers
                     {
                         valorSillas = valorSillas - (freeTicketsWithPoints * discountSilla);
                     }
-                    this.compraBoletas(allValidchair);
+                    this.compraBoletas(allValidchair, idClient);
                 }
                 ViewBag.client = (from Clientes in db.Client
                                    where Clientes.Id == idClient
@@ -188,8 +190,8 @@ namespace Cinemonito.Controllers
                                        identificacion = Clientes.Identification,
                                        totalPoints = Clientes.TotalPoints
                                    }).FirstOrDefault();
-
                 ViewBag.totalPrice = valorSillas;
+                ViewBag.idClient = idClient;
                 ViewBag.isValidsChairs = isValidsChairs;
                 ViewBag.isNotValidsChairs = isNotValidsChairs;
                 ViewBag.arrayChairSelected = arrayChairSelected;
@@ -199,7 +201,6 @@ namespace Cinemonito.Controllers
                 ViewBag.isValid = isValid;
                 ViewBag.puntosCliente = puntosCliente;
                 ViewBag.freeTicketsWithPoints = freeTicketsWithPoints;
-
                 return View("buyWindowTickets");
             }
         }
@@ -233,15 +234,23 @@ namespace Cinemonito.Controllers
             }
         }
 
-        private bool compraBoletas(List<int> allValidchair)
+        private bool compraBoletas(List<int> allValidchair, int idCliente)
         {
             using (var db = new CinemonitoEntities())
             {
                 foreach (int ids in allValidchair)
                 {
                     var request = db.ChairByMovie.Single(c => c.Id == ids);
+                    ChairEntity chairAllData = this.getOneChair((int)request.IdMovieByRoom, ids);
+                    var addticket = new Ticket
+                    {
+                        IdClient = idCliente,
+                        IdMovieByRoom = request.IdMovieByRoom,
+                        Quantity = 1,
+                        IdChair = chairAllData.idChair,
+                    };
+                    db.Ticket.Add(addticket);
                     request.IsAvailable = false;
-                    
                 }
                 db.SaveChanges();
                 return true;
@@ -340,7 +349,39 @@ namespace Cinemonito.Controllers
             }
         }
 
-
         
+        public ActionResult userBuys()
+        {
+           return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchClient(string idClient)
+        {
+            ViewBag.idClient = idClient;
+            Int32 response = -1;
+            using (CinemonitoEntities db = new CinemonitoEntities())
+            {
+                var data = (from Client in db.Client
+                            where Client.Identification.Equals(idClient)
+                            select new { Id = Client.Id }).FirstOrDefault();
+                if (data != null)
+                {
+                    ViewBag.idClient = data.Id;
+                    //ViewBag.Message = "Cliente registrado";
+                    return View("buyTickets", from Movie in db.Movie.ToList() select Movie);
+                }
+                else
+                {
+                    ViewBag.Message = "Cliente NO registrado";
+                    return View("userBuys");
+                }
+            }
+            
+           
+        }
+
+
+
     }
 }

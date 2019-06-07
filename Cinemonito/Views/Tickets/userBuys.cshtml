@@ -1,0 +1,32 @@
+﻿
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("SearchClient", "Tickets", FormMethod.Post))
+        {
+            <div class="form-group row justify-content-md-center">
+                <div class="col">
+                    <div class="mx-auto w-50 p-3 bg-dark text-white text-center" style="margin-top: 5%;">
+                        <div style="height: max-content;width: max-content;margin: 0px auto;padding: 2%;border: 10px solid #6a76bc; background: #d9e0eb;">
+                            <label for="nameClient" class="control-label">Identificacion</label>
+                            <div class="center-block" style="display: table;">
+                                <input type="text" name="idClient" required value="@ViewBag.idClient" class="form-control" />
+                                <br />
+                                <input type="submit" class="btn btn-primary form-control" value="Buscar" />
+                                <label class="control-label">@ViewBag.Message</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>
+</html>

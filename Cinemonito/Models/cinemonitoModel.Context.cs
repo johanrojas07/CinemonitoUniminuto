@@ -38,7 +38,6 @@ namespace Cinemonito.Models
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<SaleProducts> SaleProducts { get; set; }
-        public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TypeChair> TypeChair { get; set; }
         public virtual DbSet<TypeHeadquarters> TypeHeadquarters { get; set; }
         public virtual DbSet<DetailSaleProducts> DetailSaleProducts { get; set; }
@@ -46,6 +45,7 @@ namespace Cinemonito.Models
         public virtual DbSet<PrizeTicket> PrizeTicket { get; set; }
         public virtual DbSet<ProductsByHeadquarters> ProductsByHeadquarters { get; set; }
         public virtual DbSet<ChairByMovie> ChairByMovie { get; set; }
+        public virtual DbSet<Ticket> Ticket { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
