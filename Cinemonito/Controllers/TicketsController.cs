@@ -359,7 +359,6 @@ namespace Cinemonito.Controllers
         public ActionResult SearchClient(string idClient)
         {
             ViewBag.idClient = idClient;
-            Int32 response = -1;
             using (CinemonitoEntities db = new CinemonitoEntities())
             {
                 var data = (from Client in db.Client
